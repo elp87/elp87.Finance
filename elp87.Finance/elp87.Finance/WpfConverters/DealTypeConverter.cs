@@ -1,0 +1,20 @@
+﻿using System;
+using System.Windows.Data;
+
+namespace elp87.Finance.WpfConverters
+{
+    public class DealTypeConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            bool val = (bool)value;
+            if (val) return "Длинная";
+            else return "Короткая";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
