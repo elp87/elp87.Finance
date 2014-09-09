@@ -2,15 +2,15 @@
 {
     public class SysTrade : Trade, ISysTrade
     {
-        public double CumProfit { get; set; }
+        public Money CumProfit { get; set; }
 
         public double CumProfitPC { get; set; }
 
-        public double ContractProfit { get; set; }
+        public Money ContractProfit { get; set; }
 
         public double ContractProfitPC { get; set; }
 
-        public double DrawDown { get; set; }
+        public Money DrawDown { get; set; }
 
         public double DrawDownPC { get; set; }
 

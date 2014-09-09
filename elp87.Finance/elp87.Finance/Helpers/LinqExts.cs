@@ -33,6 +33,29 @@ namespace elp87.Finance.Helpers
     public static class LinqITrade
     {
         #region MaxDrawDown & MaxDrawDownPC
+        // For Money
+        private static Money MaxDrawDown(this IEnumerable<ITrade> source, Func<ITrade, bool> predicate, Func<ITrade, Money> selector)
+        {
+            Money maxDD = 0;
+            Money curDD = 0;
+            Money maxProfit = 0;
+            Money cumProfit = 0;
+
+            foreach (ITrade trade in source.Where(predicate))
+            {
+                cumProfit += selector(trade);
+                if (cumProfit > maxProfit) { maxProfit = cumProfit; }
+                curDD = maxProfit - cumProfit;
+                if (curDD > maxDD)
+                {
+                    maxDD = curDD;
+                }
+            }
+            maxDD = -maxDD;
+            return maxDD;
+        }
+
+        // For Percentage
         private static double MaxDrawDown(this IEnumerable<ITrade> source, Func<ITrade, bool> predicate, Func<ITrade, double> selector)
         {
             double maxDD = 0;
@@ -55,12 +78,12 @@ namespace elp87.Finance.Helpers
         }
 
 
-        public static double MaxDrawDown(this IEnumerable<ITrade> source, Func<ITrade, bool> predicate)
+        public static Money MaxDrawDown(this IEnumerable<ITrade> source, Func<ITrade, bool> predicate)
         {
             return source.MaxDrawDown(predicate, (trade => trade.Profit));
         }
 
-        public static double MaxDrawDown(this IEnumerable<ITrade> source)
+        public static Money MaxDrawDown(this IEnumerable<ITrade> source)
         {
             return source.MaxDrawDown(trade => true);
         }
@@ -77,12 +100,12 @@ namespace elp87.Finance.Helpers
         #endregion
 
         #region MaxDrawDownDate & MaxDrawDownPCDate
-        private static DateTime MaxDrawDownDate(this IEnumerable<ITrade> source, Func<ITrade, bool> predicate, Func<ITrade, double> selector)
+        private static DateTime MaxDrawDownDate(this IEnumerable<ITrade> source, Func<ITrade, bool> predicate, Func<ITrade, Money> selector)
         {
-            double maxDD = 0;
-            double curDD = 0;
-            double maxProfit = 0;
-            double cumProfit = 0;
+            Money maxDD = 0;
+            Money curDD = 0;
+            Money maxProfit = 0;
+            Money cumProfit = 0;
             DateTime date = new DateTime();
             foreach (ITrade trade in source.Where(predicate))
             {
@@ -121,8 +144,8 @@ namespace elp87.Finance.Helpers
         #region Profit-factor
         public static double ProfitFactor(this IEnumerable<ITrade> source, Func<ITrade, bool> predicate)
         {
-            double sumWinProfit = source.Where(trade => (trade.Profit > 0) && predicate(trade)).Sum(trade => trade.Profit);
-            double sumLoseProfit = source.Where(trade => (trade.Profit <= 0) && predicate(trade)).Sum(trade => trade.Profit);
+            Money sumWinProfit = source.Where(trade => (trade.Profit > 0) && predicate(trade)).Sum(trade => trade.Profit.Value);
+            Money sumLoseProfit = source.Where(trade => (trade.Profit <= 0) && predicate(trade)).Sum(trade => trade.Profit.Value);
 
             return -(sumWinProfit / sumLoseProfit);
         }
@@ -136,8 +159,8 @@ namespace elp87.Finance.Helpers
         #region Recovery factor
         public static double RecoveryFactor(this IEnumerable<ITrade> source, Func<ITrade, bool> predicate)
         {
-            double profit = source.Where(predicate).Sum(trade => trade.Profit);
-            double maxDD = source.MaxDrawDown(predicate);
+            Money profit = source.Where(predicate).Sum(trade => trade.Profit.Value);
+            Money maxDD = source.MaxDrawDown(predicate);
             return -(profit / maxDD);
         }
 
@@ -150,8 +173,8 @@ namespace elp87.Finance.Helpers
         #region Payoff ratio
         public static double PayoffRatio(this IEnumerable<ITrade> source, Func<ITrade, bool> predicate)
         {
-            double avgWinProfit = source.Where(trade => (trade.Profit > 0) && predicate(trade)).Average(trade => trade.Profit);
-            double avgLoseProfit = source.Where(trade => (trade.Profit <= 0) && predicate(trade)).Average(trade => trade.Profit);
+            Money avgWinProfit = source.Where(trade => (trade.Profit > 0) && predicate(trade)).Average(trade => trade.Profit.Value);
+            Money avgLoseProfit = source.Where(trade => (trade.Profit <= 0) && predicate(trade)).Average(trade => trade.Profit.Value);
             return -(avgWinProfit / avgLoseProfit);
         }
 

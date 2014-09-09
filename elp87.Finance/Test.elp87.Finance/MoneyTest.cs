@@ -274,5 +274,23 @@ namespace Test.elp87.Finance
                 Assert.AreEqual(decValues[i], moneyArray[i].Value);
             }
         }
+
+        public void TestMoreThan()
+        {
+            Money a = 100;
+            Money b = 100.5;
+            Money c = 100;
+
+            bool[] expResults = new bool[] {true, false, false};
+
+            bool[] Results = new bool[]
+            {
+                b > a,
+                a > b, 
+                a > c
+            };
+
+            CollectionAssert.AreEqual(expResults, Results);
+        }
     }
 }

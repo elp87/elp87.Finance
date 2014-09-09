@@ -34,7 +34,7 @@ namespace elp87.Finance
         {
             if (this.TradeList.Count > 0)
             {
-                double maxProfit = 0;
+                Money maxProfit = 0;
                 double maxProfitPC = 0;
 
                 ISysTrade firstTrade = this.TradeList.First();
@@ -43,7 +43,7 @@ namespace elp87.Finance
                 firstTrade.ContractProfit = firstTrade.Profit;
                 firstTrade.ContractProfitPC = firstTrade.ProfitPC;
 
-                if (firstTrade.Profit > 0)
+                if (firstTrade.Profit.Value > 0)
                 {
                     maxProfit = firstTrade.Profit;
                     maxProfitPC = firstTrade.ProfitPC;

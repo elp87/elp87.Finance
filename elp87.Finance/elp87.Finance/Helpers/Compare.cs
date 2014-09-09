@@ -6,5 +6,10 @@
         {
             return (value % 1 == 0) ? true : false;
         }
+
+        public static bool IsInteger(decimal value)
+        {
+            return (value % 1 == 0) ? true : false;
+        }
     }
 }

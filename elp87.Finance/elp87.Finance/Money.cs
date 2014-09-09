@@ -32,6 +32,13 @@
         {
             return this._value.ToString();
         }
+
+        public override bool Equals(object obj)
+        {
+            decimal value = (decimal)obj;
+
+            return (this.Value == value);
+        }
         #endregion
 
         #region Operators
@@ -43,6 +50,11 @@
         public static Money operator -(Money a, Money b)
         {
             return new Money(a.Value - b.Value);
+        }
+
+        public static Money operator -(Money a)
+        {
+            return new Money(-a.Value);
         }
 
         public static Money operator *(Money money, int mult)
@@ -70,6 +82,26 @@
             return (double)(a.Value / b.Value);
         }
 
+        public static bool operator >(Money a, Money b)
+        {
+            return (a.Value > b.Value);
+        }
+
+        public static bool operator <(Money a, Money b)
+        {
+            return (a.Value < b.Value);
+        }
+
+        public static bool operator >=(Money a, Money b)
+        {
+            return (a.Value >= b.Value);
+        }
+
+        public static bool operator <=(Money a, Money b)
+        {
+            return (a.Value <= b.Value);
+        }
+        
         #region Implicit
         public static implicit operator Money(int value)
         {

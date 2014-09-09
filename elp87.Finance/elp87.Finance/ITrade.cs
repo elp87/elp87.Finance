@@ -7,15 +7,15 @@ namespace elp87.Finance
         DateTime EntryDateTime { get; set; }
         DateTime ExitDateTime { get; set; }
 
-        double EntryPrice { get; set; }
-        double ExitPrice { get; set; }
+        Money EntryPrice { get; set; }
+        Money ExitPrice { get; set; }
 
         int Count { get; set; }
 
-        double EntryVolume { get; }
-        double ExitVolume { get; }
+        Money EntryVolume { get; }
+        Money ExitVolume { get; }
 
-        double Profit { get; }
+        Money Profit { get; }
         double ProfitPC { get; }
 
         string InstrumentName { get; set; }

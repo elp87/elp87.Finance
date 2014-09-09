@@ -7,8 +7,8 @@ namespace elp87.Finance
         #region Fields
         protected DateTime _entryDateTime;
         protected DateTime _exitDateTime;
-        protected double _entryPrice;
-        protected double _exitPrice;
+        protected Money _entryPrice;
+        protected Money _exitPrice;
         protected int _count;
         protected string _instrumentName;
         protected bool _isLong;
@@ -27,13 +27,13 @@ namespace elp87.Finance
             set { _exitDateTime = value; }
         }
 
-        public double EntryPrice
+        public Money EntryPrice
         {
             get { return _entryPrice; }
             set { _entryPrice = value; }
         }
 
-        public double ExitPrice
+        public Money ExitPrice
         {
             get { return _exitPrice; }
             set { _exitPrice = value; }
@@ -45,17 +45,17 @@ namespace elp87.Finance
             set { _count = value; }
         }
 
-        public double EntryVolume
+        public Money EntryVolume
         {
             get { return (_entryPrice * _count); }
         }
 
-        public double ExitVolume
+        public Money ExitVolume
         {
             get { return (_exitPrice * _count); }
         }
 
-        public double Profit
+        public Money Profit
         {
             get { return (_isLong) ? (ExitVolume - EntryVolume) : (EntryVolume - ExitVolume); }
         }

@@ -33,6 +33,35 @@ namespace elp87.Finance.Helpers
         }
         #endregion
 
+        #region Decimal
+        public static string ToStringBase(this decimal value)
+        {
+            if (Compare.IsInteger(value))
+            {
+                return value.ToStringInt();
+            }
+            else
+            {
+                return value.ToStringFloat();
+            }
+        }
+
+        public static string ToStringInt(this decimal value)
+        {
+            return value.ToString("0,0", System.Globalization.CultureInfo.CreateSpecificCulture("ru-RU"));
+        }
+
+        public static string ToStringFloat(this decimal value)
+        {
+            return value.ToString("0,0.0#", System.Globalization.CultureInfo.CreateSpecificCulture("ru-RU"));
+        }
+
+        public static string ToStringShortFloat(this decimal value)
+        {
+            return value.ToString("0.0#", System.Globalization.CultureInfo.CreateSpecificCulture("ru-RU"));
+        }
+        #endregion
+
         #region DateTime
         public static string ToStandardString(this DateTime value)
         {
