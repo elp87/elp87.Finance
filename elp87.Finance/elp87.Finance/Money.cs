@@ -27,6 +27,13 @@
         public decimal Value { get { return _value; } set { _value = value; } }
         #endregion
 
+        #region Methods
+        public override string ToString()
+        {
+            return this._value.ToString();
+        }
+        #endregion
+
         #region Operators
         public static Money operator +(Money a, Money b)
         {

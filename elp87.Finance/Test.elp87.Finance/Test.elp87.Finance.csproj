@@ -55,6 +55,7 @@
     <Compile Include="ConvertTest.cs" />
     <Compile Include="LinqExtsTest.cs" />
     <Compile Include="TradeSystemPropertiesTest.cs" />
+    <Compile Include="MoneyTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\elp87.Finance\elp87.Finance.csproj">
