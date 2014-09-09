@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "elp87.Finance", "elp87.Finance\elp87.Finance.csproj", "{53D80424-7867-4704-8994-9490B1AAAC22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "elp87.Finance.Graphs.Telerik", "elp87.Graphs.Telerik\elp87.Finance.Graphs.Telerik.csproj", "{491D1F09-EB72-4EE4-80A1-0A0BDCE1FC10}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.elp87.Finance", "Test.elp87.Finance\Test.elp87.Finance.csproj", "{B0302385-E6F8-415E-9C8B-5DB60407DDDF}"
 EndProject
 Global
@@ -17,10 +15,6 @@ Global
 		{53D80424-7867-4704-8994-9490B1AAAC22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53D80424-7867-4704-8994-9490B1AAAC22}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53D80424-7867-4704-8994-9490B1AAAC22}.Release|Any CPU.Build.0 = Release|Any CPU
-		{491D1F09-EB72-4EE4-80A1-0A0BDCE1FC10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{491D1F09-EB72-4EE4-80A1-0A0BDCE1FC10}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{491D1F09-EB72-4EE4-80A1-0A0BDCE1FC10}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{491D1F09-EB72-4EE4-80A1-0A0BDCE1FC10}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B0302385-E6F8-415E-9C8B-5DB60407DDDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B0302385-E6F8-415E-9C8B-5DB60407DDDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0302385-E6F8-415E-9C8B-5DB60407DDDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
