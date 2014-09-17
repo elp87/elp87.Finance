@@ -35,9 +35,9 @@
 
         public override bool Equals(object obj)
         {
-            decimal value = (decimal)obj;
+            Money value = ((Money)obj).Value;
 
-            return (this.Value == value);
+            return (this.Value == value.Value);
         }
         #endregion
 
