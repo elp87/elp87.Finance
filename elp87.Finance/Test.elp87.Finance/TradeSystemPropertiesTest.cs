@@ -23,7 +23,7 @@ namespace Test.elp87.Finance
                 ExitDateTime = new DateTime(2013, 04, 18, 11, 30, 0),
                 ExitPrice = 130470
             };
-            sys1.TradeList.Add(trade0);
+            sys1.AddTrade(trade0);
 
             SysTrade trade1 = new SysTrade()
             {
@@ -34,7 +34,7 @@ namespace Test.elp87.Finance
                 ExitDateTime = new DateTime(2013, 04, 18, 15, 30, 0),
                 ExitPrice = 130560
             };
-            sys1.TradeList.Add(trade1);
+            sys1.AddTrade(trade1);
 
             SysTrade trade2 = new SysTrade()
             {
@@ -45,7 +45,7 @@ namespace Test.elp87.Finance
                 ExitDateTime = new DateTime(2013, 04, 18, 22, 0, 0),
                 ExitPrice = 128990
             };
-            sys1.TradeList.Add(trade2);
+            sys1.AddTrade(trade2);
 
             SysTrade trade3 = new SysTrade()
             {
@@ -56,7 +56,7 @@ namespace Test.elp87.Finance
                 ExitDateTime = new DateTime(2013, 04, 19, 20, 30, 0),
                 ExitPrice = 129910
             };
-            sys1.TradeList.Add(trade3);
+            sys1.AddTrade(trade3);
 
             SysTrade trade4 = new SysTrade()
             {
@@ -67,7 +67,7 @@ namespace Test.elp87.Finance
                 ExitDateTime = new DateTime(2013, 04, 22, 20, 0, 0),
                 ExitPrice = 128910
             };
-            sys1.TradeList.Add(trade4);
+            sys1.AddTrade(trade4);
 
             SysTrade trade5 = new SysTrade()
             {
@@ -78,7 +78,7 @@ namespace Test.elp87.Finance
                 ExitDateTime = new DateTime(2013, 04, 23, 10, 0, 0),
                 ExitPrice = 128400
             };
-            sys1.TradeList.Add(trade5);
+            sys1.AddTrade(trade5);
 
             SysTrade trade6 = new SysTrade()
             {
@@ -89,7 +89,7 @@ namespace Test.elp87.Finance
                 ExitDateTime = new DateTime(2013, 04, 23, 11, 0, 0),
                 ExitPrice = 128540
             };
-            sys1.TradeList.Add(trade6);
+            sys1.AddTrade(trade6);
 
             SysTrade trade7 = new SysTrade()
             {
@@ -100,7 +100,7 @@ namespace Test.elp87.Finance
                 ExitDateTime = new DateTime(2013, 04, 23, 16, 30, 0),
                 ExitPrice = 129230
             };
-            sys1.TradeList.Add(trade7);
+            sys1.AddTrade(trade7);
 
             SysTrade trade8 = new SysTrade()
             {
@@ -111,7 +111,7 @@ namespace Test.elp87.Finance
                 ExitDateTime = new DateTime(2013, 04, 23, 17, 30, 0),
                 ExitPrice = 129420
             };
-            sys1.TradeList.Add(trade8);
+            sys1.AddTrade(trade8);
 
             SysTrade trade9 = new SysTrade()
             {
@@ -122,7 +122,7 @@ namespace Test.elp87.Finance
                 ExitDateTime = new DateTime(2013, 04, 25, 11, 30, 0),
                 ExitPrice = 134850
             };
-            sys1.TradeList.Add(trade9);
+            sys1.AddTrade(trade9);
         }
 
         [TestMethod]

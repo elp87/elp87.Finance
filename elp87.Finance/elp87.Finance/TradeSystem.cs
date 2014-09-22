@@ -6,16 +6,28 @@ namespace elp87.Finance
 {
     public partial class TradeSystem
     {
+        private List<ISysTrade> _tradeList;
         #region Constructors
         public TradeSystem()
         {
-            this.TradeList = new List<ISysTrade>();
+            this._tradeList = new List<ISysTrade>();
             this.Properties = new TradeSystemProperties(this);
         }
         #endregion
 
         #region Properties
-        public List<ISysTrade> TradeList { get; set; }
+        public ISysTrade[] Trades
+        {
+            get
+            {
+                ISysTrade[] trades = new ISysTrade[this._tradeList.Count];
+                for (int i = 0; i < trades.Length; i++)
+                {
+                    trades[i] = this._tradeList[i];
+                }
+                return trades;
+            }
+        }
 
         public string Name { get; set; }
 
@@ -30,14 +42,23 @@ namespace elp87.Finance
         #endregion
 
         #region Methods
-        public void CalcTradeProperties()
+        #region Public
+        public void AddTrade(ISysTrade trade)
         {
-            if (this.TradeList.Count > 0)
+            this._tradeList.Add(trade);
+            this.CalcTradeProperties();
+        }
+        #endregion
+
+        #region Protected
+        protected void CalcTradeProperties()
+        {
+            if (this._tradeList.Count > 0)
             {
                 Money maxProfit = 0;
                 double maxProfitPC = 0;
 
-                ISysTrade firstTrade = this.TradeList.First();
+                ISysTrade firstTrade = this.Trades.First();
                 firstTrade.CumProfit = firstTrade.Profit;
                 firstTrade.CumProfitPC = firstTrade.ProfitPC;
                 firstTrade.ContractProfit = firstTrade.Profit;
@@ -56,10 +77,10 @@ namespace elp87.Finance
                     firstTrade.DrawDownPC = -firstTrade.ProfitPC;
                 }
 
-                for (int tradeNum = 1; tradeNum < this.TradeList.Count; tradeNum++)
+                for (int tradeNum = 1; tradeNum < this._tradeList.Count; tradeNum++)
                 {
-                    ISysTrade curTrade = this.TradeList[tradeNum];
-                    ISysTrade prevTrade = this.TradeList[tradeNum - 1];
+                    ISysTrade curTrade = this.Trades[tradeNum];
+                    ISysTrade prevTrade = this.Trades[tradeNum - 1];
 
                     curTrade.CumProfit = prevTrade.CumProfit + curTrade.Profit;
                     curTrade.CumProfitPC = Math.Round(prevTrade.CumProfitPC + curTrade.ProfitPC, 2);
@@ -82,6 +103,7 @@ namespace elp87.Finance
                 }
             }
         }
+        #endregion
         #endregion
     }
 }

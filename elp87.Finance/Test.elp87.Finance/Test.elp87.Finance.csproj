@@ -57,6 +57,7 @@
     <Compile Include="TradeSystemPropertiesTest.cs" />
     <Compile Include="MoneyTest.cs" />
     <Compile Include="TradeTest.cs" />
+    <Compile Include="SysTradeTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\elp87.Finance\elp87.Finance.csproj">

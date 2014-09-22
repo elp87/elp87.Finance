@@ -39,42 +39,42 @@ namespace elp87.Finance
             #region Private
             private Money _sumProfit
             {
-                get { return _parent.TradeList.Sum(trade => trade.Profit.Value); }
+                get { return _parent.Trades.Sum(trade => trade.Profit.Value); }
             }
 
             private Money _sumProfitLong
             {
-                get { return _parent.TradeList.Where(trade => trade.IsLong).Sum(trade => trade.Profit.Value); }
+                get { return _parent.Trades.Where(trade => trade.IsLong).Sum(trade => trade.Profit.Value); }
             }
 
             private Money _sumProfitShort
             {
-                get { return _parent.TradeList.Where(trade => trade.IsLong).Sum(trade => trade.Profit.Value); }
+                get { return _parent.Trades.Where(trade => trade.IsLong).Sum(trade => trade.Profit.Value); }
             }
 
             private double _sumProfitPC
             {
-                get { return _parent.TradeList.Sum(trade => trade.ProfitPC); }
+                get { return _parent.Trades.Sum(trade => trade.ProfitPC); }
             }
 
             private double _sumProfitPCLong
             {
-                get { return _parent.TradeList.Where(trade => trade.IsLong).Sum(trade => trade.ProfitPC); }
+                get { return _parent.Trades.Where(trade => trade.IsLong).Sum(trade => trade.ProfitPC); }
             }
 
             private double _sumProfitPCShort
             {
-                get { return _parent.TradeList.Where(trade => !trade.IsLong).Sum(trade => trade.ProfitPC); }
+                get { return _parent.Trades.Where(trade => !trade.IsLong).Sum(trade => trade.ProfitPC); }
             }
 
             private DateTime _beginDate
             {
-                get { return _parent.TradeList.Min(trade => trade.EntryDateTime); }
+                get { return _parent.Trades.Min(trade => trade.EntryDateTime); }
             }
 
             private DateTime _endDate
             {
-                get { return _parent.TradeList.Max(trade => trade.ExitDateTime); }
+                get { return _parent.Trades.Max(trade => trade.ExitDateTime); }
             }
 
             private double _tradePeriod
@@ -86,17 +86,17 @@ namespace elp87.Finance
             #region CumProfit
             public string CumProfitAll
             {
-                get { return _parent.TradeList.Sum(trade => trade.Profit.Value).ToStringBase(); }
+                get { return _parent.Trades.Sum(trade => trade.Profit.Value).ToStringBase(); }
             }
 
             public string CumProfitLong
             {
-                get { return _parent.TradeList.Where(trade => trade.IsLong).Sum(trade => trade.Profit.Value).ToStringBase(); }
+                get { return _parent.Trades.Where(trade => trade.IsLong).Sum(trade => trade.Profit.Value).ToStringBase(); }
             }
 
             public string CumProfitShort
             {
-                get { return _parent.TradeList.Where(trade => !trade.IsLong).Sum(trade => trade.Profit.Value).ToStringBase(); }
+                get { return _parent.Trades.Where(trade => !trade.IsLong).Sum(trade => trade.Profit.Value).ToStringBase(); }
             }
             #endregion
 
@@ -154,374 +154,374 @@ namespace elp87.Finance
             #region TradeCount
             public string TradeCountAll
             {
-                get { return _parent.TradeList.Count.ToString(); }
+                get { return _parent._tradeList.Count.ToString(); }
             }
 
             public string TradeCountLong
             {
-                get { return _parent.TradeList.Count(trade => trade.IsLong).ToString(); }
+                get { return _parent.Trades.Count(trade => trade.IsLong).ToString(); }
             }
 
             public string TradeCountShort
             {
-                get { return _parent.TradeList.Count(trade => !trade.IsLong).ToString(); }
+                get { return _parent.Trades.Count(trade => !trade.IsLong).ToString(); }
             }
             #endregion
 
             #region TradeProfitAverage
             public string TradeProfitAverageAll
             {
-                get { return _parent.TradeList.Average(trade => trade.Profit.Value).ToStringFloat(); }
+                get { return _parent.Trades.Average(trade => trade.Profit.Value).ToStringFloat(); }
             }
 
             public string TradeProfitAverageLong
             {
-                get { return _parent.TradeList.Where(trade => trade.IsLong).Average(trade => trade.Profit.Value).ToStringFloat(); }
+                get { return _parent.Trades.Where(trade => trade.IsLong).Average(trade => trade.Profit.Value).ToStringFloat(); }
             }
 
             public string TradeProfitAverageShort
             {
-                get { return _parent.TradeList.Where(trade => !trade.IsLong).Average(trade => trade.Profit.Value).ToStringFloat(); }
+                get { return _parent.Trades.Where(trade => !trade.IsLong).Average(trade => trade.Profit.Value).ToStringFloat(); }
             }
             #endregion
 
             #region AverageTradeProfitPC
             public string TradeProfitPCAverageAll
             {
-                get { return _parent.TradeList.Average(trade => trade.ProfitPC).ToStringShortFloat() + "%"; }
+                get { return _parent.Trades.Average(trade => trade.ProfitPC).ToStringShortFloat() + "%"; }
             }
 
             public string TradeProfitPCAverageLong
             {
-                get { return _parent.TradeList.Where(trade => trade.IsLong).Average(trade => trade.ProfitPC).ToStringShortFloat() + "%"; }
+                get { return _parent.Trades.Where(trade => trade.IsLong).Average(trade => trade.ProfitPC).ToStringShortFloat() + "%"; }
             }
 
             public string TradeProfitPCAverageShort
             {
-                get { return _parent.TradeList.Where(trade => !trade.IsLong).Average(trade => trade.ProfitPC).ToStringShortFloat() + "%"; }
+                get { return _parent.Trades.Where(trade => !trade.IsLong).Average(trade => trade.ProfitPC).ToStringShortFloat() + "%"; }
             }
             #endregion
 
             #region WinTradeCount
             public string WinTradeCountAll
             {
-                get { return _parent.TradeList.Count(trade => trade.Profit.Value > 0).ToString(); }
+                get { return _parent.Trades.Count(trade => trade.Profit.Value > 0).ToString(); }
             }
 
             public string WinTradeCountLong
             {
-                get { return _parent.TradeList.Count(trade => trade.IsLong && (trade.Profit.Value > 0)).ToString(); }
+                get { return _parent.Trades.Count(trade => trade.IsLong && (trade.Profit.Value > 0)).ToString(); }
             }
 
             public string WinTradeCountShort
             {
-                get { return _parent.TradeList.Count(trade => !trade.IsLong && (trade.Profit.Value > 0)).ToString(); }
+                get { return _parent.Trades.Count(trade => !trade.IsLong && (trade.Profit.Value > 0)).ToString(); }
             }
             #endregion
 
             #region WinTradeCountPC
             public string WinTradeCountPCAll
             {
-                get { return (_parent.TradeList.PercentageCount(trade => trade.Profit.Value > 0).ToStringShortFloat() + "%"); }
+                get { return (_parent.Trades.PercentageCount(trade => trade.Profit.Value > 0).ToStringShortFloat() + "%"); }
             }
 
             public string WinTradeCountPCLong
             {
-                get { return (_parent.TradeList.Where(trade => trade.IsLong).PercentageCount(trade => trade.Profit.Value > 0).ToStringShortFloat() + "%"); }
+                get { return (_parent.Trades.Where(trade => trade.IsLong).PercentageCount(trade => trade.Profit.Value > 0).ToStringShortFloat() + "%"); }
             }
 
             public string WinTradeCountPCShort
             {
-                get { return (_parent.TradeList.Where(trade => !trade.IsLong).PercentageCount(trade => trade.Profit.Value > 0).ToStringShortFloat() + "%"); }
+                get { return (_parent.Trades.Where(trade => !trade.IsLong).PercentageCount(trade => trade.Profit.Value > 0).ToStringShortFloat() + "%"); }
             }
             #endregion
 
             #region WinProfitSum
             public string WinProfitSumAll
             {
-                get { return _parent.TradeList.Where(trade => trade.Profit.Value > 0).Sum(trade => trade.Profit.Value).ToStringBase(); }
+                get { return _parent.Trades.Where(trade => trade.Profit.Value > 0).Sum(trade => trade.Profit.Value).ToStringBase(); }
             }
 
             public string WinProfitSumLong
             {
-                get { return _parent.TradeList.Where(trade => trade.IsLong && trade.Profit.Value > 0).Sum(trade => trade.Profit.Value).ToStringBase(); }
+                get { return _parent.Trades.Where(trade => trade.IsLong && trade.Profit.Value > 0).Sum(trade => trade.Profit.Value).ToStringBase(); }
             }
 
             public string WinProfitSumShort
             {
-                get { return _parent.TradeList.Where(trade => !trade.IsLong && trade.Profit.Value > 0).Sum(trade => trade.Profit.Value).ToStringBase(); }
+                get { return _parent.Trades.Where(trade => !trade.IsLong && trade.Profit.Value > 0).Sum(trade => trade.Profit.Value).ToStringBase(); }
             }
             #endregion
 
             #region WinProfitAverage
             public string WinProfitAverageAll
             {
-                get { return _parent.TradeList.Where(trade => trade.Profit.Value > 0).Average(trade => trade.Profit.Value).ToStringBase(); }
+                get { return _parent.Trades.Where(trade => trade.Profit.Value > 0).Average(trade => trade.Profit.Value).ToStringBase(); }
             }
 
             public string WinProfitAverageLong
             {
-                get { return _parent.TradeList.Where(trade => trade.IsLong && trade.Profit.Value > 0).Average(trade => trade.Profit.Value).ToStringBase(); }
+                get { return _parent.Trades.Where(trade => trade.IsLong && trade.Profit.Value > 0).Average(trade => trade.Profit.Value).ToStringBase(); }
             }
 
             public string WinProfitAverageShort
             {
-                get { return _parent.TradeList.Where(trade => !trade.IsLong && trade.Profit.Value > 0).Average(trade => trade.Profit.Value).ToStringBase(); }
+                get { return _parent.Trades.Where(trade => !trade.IsLong && trade.Profit.Value > 0).Average(trade => trade.Profit.Value).ToStringBase(); }
             }
             #endregion
 
             #region WinProfitPCAverage
             public string WinProfitPCAverageAll
             {
-                get { return _parent.TradeList.Where(trade => trade.ProfitPC > 0).Average(trade => trade.ProfitPC).ToStringShortFloat() + "%"; }
+                get { return _parent.Trades.Where(trade => trade.ProfitPC > 0).Average(trade => trade.ProfitPC).ToStringShortFloat() + "%"; }
             }
 
             public string WinProfitPCAverageLong
             {
-                get { return _parent.TradeList.Where(trade => trade.IsLong && trade.ProfitPC > 0).Average(trade => trade.ProfitPC).ToStringShortFloat() + "%"; }
+                get { return _parent.Trades.Where(trade => trade.IsLong && trade.ProfitPC > 0).Average(trade => trade.ProfitPC).ToStringShortFloat() + "%"; }
             }
 
             public string WinProfitPCAverageShort
             {
-                get { return _parent.TradeList.Where(trade => !trade.IsLong && trade.ProfitPC > 0).Average(trade => trade.ProfitPC).ToStringShortFloat() + "%"; }
+                get { return _parent.Trades.Where(trade => !trade.IsLong && trade.ProfitPC > 0).Average(trade => trade.ProfitPC).ToStringShortFloat() + "%"; }
             }
             #endregion
 
             #region MaxWinRow
             public string MaxWinRowAll
             {
-                get { return _parent.TradeList.MaxCountInRow(trade => trade.Profit.Value > 0).ToString(); }
+                get { return _parent.Trades.MaxCountInRow(trade => trade.Profit.Value > 0).ToString(); }
             }
 
             public string MaxWinRowLong
             {
-                get { return _parent.TradeList.Where(trade => trade.IsLong).MaxCountInRow(trade => trade.Profit.Value > 0).ToString(); }
+                get { return _parent.Trades.Where(trade => trade.IsLong).MaxCountInRow(trade => trade.Profit.Value > 0).ToString(); }
             }
 
             public string MaxWinRowShort
             {
-                get { return _parent.TradeList.Where(trade => !trade.IsLong).MaxCountInRow(trade => trade.Profit.Value > 0).ToString(); }
+                get { return _parent.Trades.Where(trade => !trade.IsLong).MaxCountInRow(trade => trade.Profit.Value > 0).ToString(); }
             }
             #endregion
 
             #region LoseTradeCount
             public string LoseTradeCountAll
             {
-                get { return _parent.TradeList.Count(trade => trade.Profit.Value <= 0).ToString(); }
+                get { return _parent.Trades.Count(trade => trade.Profit.Value <= 0).ToString(); }
             }
 
             public string LoseTradeCountLong
             {
-                get { return _parent.TradeList.Count(trade => trade.IsLong && (trade.Profit.Value <= 0)).ToString(); }
+                get { return _parent.Trades.Count(trade => trade.IsLong && (trade.Profit.Value <= 0)).ToString(); }
             }
 
             public string LoseTradeCountShort
             {
-                get { return _parent.TradeList.Count(trade => !trade.IsLong && (trade.Profit.Value <= 0)).ToString(); }
+                get { return _parent.Trades.Count(trade => !trade.IsLong && (trade.Profit.Value <= 0)).ToString(); }
             }
             #endregion
 
             #region LoseTradeCountPC
             public string LoseTradeCountPCAll
             {
-                get { return (_parent.TradeList.PercentageCount(trade => trade.Profit.Value <= 0).ToStringShortFloat() + "%"); }
+                get { return (_parent.Trades.PercentageCount(trade => trade.Profit.Value <= 0).ToStringShortFloat() + "%"); }
             }
 
             public string LoseTradeCountPCLong
             {
-                get { return (_parent.TradeList.Where(trade => trade.IsLong).PercentageCount(trade => trade.Profit.Value <= 0).ToStringShortFloat() + "%"); }
+                get { return (_parent.Trades.Where(trade => trade.IsLong).PercentageCount(trade => trade.Profit.Value <= 0).ToStringShortFloat() + "%"); }
             }
 
             public string LoseTradeCountPCShort
             {
-                get { return (_parent.TradeList.Where(trade => !trade.IsLong).PercentageCount(trade => trade.Profit.Value <= 0).ToStringShortFloat() + "%"); }
+                get { return (_parent.Trades.Where(trade => !trade.IsLong).PercentageCount(trade => trade.Profit.Value <= 0).ToStringShortFloat() + "%"); }
             }
             #endregion
 
             #region LoseProfitSum
             public string LoseProfitSumAll
             {
-                get { return _parent.TradeList.Where(trade => trade.Profit.Value <= 0).Sum(trade => trade.Profit.Value).ToStringBase(); }
+                get { return _parent.Trades.Where(trade => trade.Profit.Value <= 0).Sum(trade => trade.Profit.Value).ToStringBase(); }
             }
 
             public string LoseProfitSumLong
             {
-                get { return _parent.TradeList.Where(trade => trade.IsLong && trade.Profit.Value <= 0).Sum(trade => trade.Profit.Value).ToStringBase(); }
+                get { return _parent.Trades.Where(trade => trade.IsLong && trade.Profit.Value <= 0).Sum(trade => trade.Profit.Value).ToStringBase(); }
             }
 
             public string LoseProfitSumShort
             {
-                get { return _parent.TradeList.Where(trade => !trade.IsLong && trade.Profit.Value <= 0).Sum(trade => trade.Profit.Value).ToStringBase(); }
+                get { return _parent.Trades.Where(trade => !trade.IsLong && trade.Profit.Value <= 0).Sum(trade => trade.Profit.Value).ToStringBase(); }
             }
             #endregion
 
             #region LoseProfitAverage
             public string LoseProfitAverageAll
             {
-                get { return _parent.TradeList.Where(trade => trade.Profit.Value <= 0).Average(trade => trade.Profit.Value).ToStringBase(); }
+                get { return _parent.Trades.Where(trade => trade.Profit.Value <= 0).Average(trade => trade.Profit.Value).ToStringBase(); }
             }
 
             public string LoseProfitAverageLong
             {
-                get { return _parent.TradeList.Where(trade => trade.IsLong && trade.Profit.Value <= 0).Average(trade => trade.Profit.Value).ToStringBase(); }
+                get { return _parent.Trades.Where(trade => trade.IsLong && trade.Profit.Value <= 0).Average(trade => trade.Profit.Value).ToStringBase(); }
             }
 
             public string LoseProfitAverageShort
             {
-                get { return _parent.TradeList.Where(trade => !trade.IsLong && trade.Profit.Value <= 0).Average(trade => trade.Profit.Value).ToStringBase(); }
+                get { return _parent.Trades.Where(trade => !trade.IsLong && trade.Profit.Value <= 0).Average(trade => trade.Profit.Value).ToStringBase(); }
             }
             #endregion
 
             #region LoseProfitPCAverage
             public string LoseProfitPCAverageAll
             {
-                get { return _parent.TradeList.Where(trade => trade.ProfitPC <= 0).Average(trade => trade.ProfitPC).ToStringShortFloat() + "%"; }
+                get { return _parent.Trades.Where(trade => trade.ProfitPC <= 0).Average(trade => trade.ProfitPC).ToStringShortFloat() + "%"; }
             }
 
             public string LoseProfitPCAverageLong
             {
-                get { return _parent.TradeList.Where(trade => trade.IsLong && trade.ProfitPC <= 0).Average(trade => trade.ProfitPC).ToStringShortFloat() + "%"; }
+                get { return _parent.Trades.Where(trade => trade.IsLong && trade.ProfitPC <= 0).Average(trade => trade.ProfitPC).ToStringShortFloat() + "%"; }
             }
 
             public string LoseProfitPCAverageShort
             {
-                get { return _parent.TradeList.Where(trade => !trade.IsLong && trade.ProfitPC <= 0).Average(trade => trade.ProfitPC).ToStringShortFloat() + "%"; }
+                get { return _parent.Trades.Where(trade => !trade.IsLong && trade.ProfitPC <= 0).Average(trade => trade.ProfitPC).ToStringShortFloat() + "%"; }
             }
             #endregion
 
             #region MaxLoseRow
             public string MaxLoseRowAll
             {
-                get { return _parent.TradeList.MaxCountInRow(trade => trade.Profit.Value <= 0).ToString(); }
+                get { return _parent.Trades.MaxCountInRow(trade => trade.Profit.Value <= 0).ToString(); }
             }
 
             public string MaxLoseRowLong
             {
-                get { return _parent.TradeList.Where(trade => trade.IsLong).MaxCountInRow(trade => trade.Profit.Value <= 0).ToString(); }
+                get { return _parent.Trades.Where(trade => trade.IsLong).MaxCountInRow(trade => trade.Profit.Value <= 0).ToString(); }
             }
 
             public string MaxLoseRowShort
             {
-                get { return _parent.TradeList.Where(trade => !trade.IsLong).MaxCountInRow(trade => trade.Profit.Value <= 0).ToString(); }
+                get { return _parent.Trades.Where(trade => !trade.IsLong).MaxCountInRow(trade => trade.Profit.Value <= 0).ToString(); }
             }
             #endregion
 
             #region MaxDrawDown
             public string MaxDrawDownAll
             {
-                get { return _parent.TradeList.MaxDrawDown().Value.ToStringBase(); }
+                get { return _parent.Trades.MaxDrawDown().Value.ToStringBase(); }
             }
 
             public string MaxDrawDownLong
             {
-                get { return _parent.TradeList.MaxDrawDown(trade => trade.IsLong).Value.ToStringBase(); }
+                get { return _parent.Trades.MaxDrawDown(trade => trade.IsLong).Value.ToStringBase(); }
             }
 
             public string MaxDrawDownShort
             {
-                get { return _parent.TradeList.MaxDrawDown(trade => !trade.IsLong).Value.ToStringBase(); }
+                get { return _parent.Trades.MaxDrawDown(trade => !trade.IsLong).Value.ToStringBase(); }
             }
             #endregion
 
             #region MaxDrawDownDate
             public string MaxDrawDownDateAll
             {
-                get { return _parent.TradeList.MaxDrawDownDate().ToStandardString(); }
+                get { return _parent.Trades.MaxDrawDownDate().ToStandardString(); }
             }
 
             public string MaxDrawDownDateLong
             {
-                get { return _parent.TradeList.MaxDrawDownDate(trade => trade.IsLong).ToStandardString(); }
+                get { return _parent.Trades.MaxDrawDownDate(trade => trade.IsLong).ToStandardString(); }
             }
 
             public string MaxDrawDownDateShort
             {
-                get { return _parent.TradeList.MaxDrawDownDate(trade => !trade.IsLong).ToStandardString(); }
+                get { return _parent.Trades.MaxDrawDownDate(trade => !trade.IsLong).ToStandardString(); }
             }
             #endregion
 
             #region MaxDrawDownPC
             public string MaxDrawDownPCAll
             {
-                get { return _parent.TradeList.MaxDrawDownPC().ToStringShortFloat() + "%"; }
+                get { return _parent.Trades.MaxDrawDownPC().ToStringShortFloat() + "%"; }
             }
 
             public string MaxDrawDownPCLong
             {
-                get { return _parent.TradeList.MaxDrawDownPC(trade => trade.IsLong).ToStringShortFloat() + "%"; }
+                get { return _parent.Trades.MaxDrawDownPC(trade => trade.IsLong).ToStringShortFloat() + "%"; }
             }
 
             public string MaxDrawDownPCShort
             {
-                get { return _parent.TradeList.MaxDrawDownPC(trade => !trade.IsLong).ToStringShortFloat() + "%"; }
+                get { return _parent.Trades.MaxDrawDownPC(trade => !trade.IsLong).ToStringShortFloat() + "%"; }
             }
             #endregion
 
             #region MaxDrawDownPCDate
             public string MaxDrawDownPCDateAll
             {
-                get { return _parent.TradeList.MaxDrawDownPCDate().ToStandardString(); }
+                get { return _parent.Trades.MaxDrawDownPCDate().ToStandardString(); }
             }
 
             public string MaxDrawDownPCDateLong
             {
-                get { return _parent.TradeList.MaxDrawDownPCDate(trade => trade.IsLong).ToStandardString(); }
+                get { return _parent.Trades.MaxDrawDownPCDate(trade => trade.IsLong).ToStandardString(); }
             }
 
             public string MaxDrawDownPCDateShort
             {
-                get { return _parent.TradeList.MaxDrawDownPCDate(trade => !trade.IsLong).ToStandardString(); }
+                get { return _parent.Trades.MaxDrawDownPCDate(trade => !trade.IsLong).ToStandardString(); }
             }
             #endregion
 
             #region ProfitFactor
             public string ProfitFactorAll
             {
-                get { return _parent.TradeList.ProfitFactor().ToStringShortFloat(); }
+                get { return _parent.Trades.ProfitFactor().ToStringShortFloat(); }
             }
 
             public string ProfitFactorLong
             {
-                get { return _parent.TradeList.ProfitFactor(trade => trade.IsLong).ToStringShortFloat(); }
+                get { return _parent.Trades.ProfitFactor(trade => trade.IsLong).ToStringShortFloat(); }
             }
 
             public string ProfitFactorShort
             {
-                get { return _parent.TradeList.ProfitFactor(trade => !trade.IsLong).ToStringShortFloat(); }
+                get { return _parent.Trades.ProfitFactor(trade => !trade.IsLong).ToStringShortFloat(); }
             }
             #endregion
 
             #region RecoveryFactor
             public string RecoveryFactorAll
             {
-                get { return _parent.TradeList.RecoveryFactor().ToStringShortFloat(); }
+                get { return _parent.Trades.RecoveryFactor().ToStringShortFloat(); }
             }
 
             public string RecoveryFactorLong
             {
-                get { return _parent.TradeList.RecoveryFactor(trade => trade.IsLong).ToStringShortFloat(); }
+                get { return _parent.Trades.RecoveryFactor(trade => trade.IsLong).ToStringShortFloat(); }
             }
 
             public string RecoveryFactorShort
             {
-                get { return _parent.TradeList.RecoveryFactor(trade => !trade.IsLong).ToStringShortFloat(); }
+                get { return _parent.Trades.RecoveryFactor(trade => !trade.IsLong).ToStringShortFloat(); }
             }
             #endregion
 
             #region PayoffRatio
             public string PayoffRatioAll
             {
-                get { return _parent.TradeList.PayoffRatio().ToStringShortFloat(); }
+                get { return _parent.Trades.PayoffRatio().ToStringShortFloat(); }
             }
 
             public string PayoffRatioLong
             {
-                get { return _parent.TradeList.PayoffRatio(trade => trade.IsLong).ToStringShortFloat(); }
+                get { return _parent.Trades.PayoffRatio(trade => trade.IsLong).ToStringShortFloat(); }
             }
 
             public string PayoffRatioShort
             {
-                get { return _parent.TradeList.PayoffRatio(trade => !trade.IsLong).ToStringShortFloat(); }
+                get { return _parent.Trades.PayoffRatio(trade => !trade.IsLong).ToStringShortFloat(); }
             }
             #endregion
             #endregion
@@ -529,7 +529,7 @@ namespace elp87.Finance
             #region Methods
             public List<TradeProperty> GetPropertyList()
             {
-                if (_parent.TradeList.Count > 0)
+                if (_parent._tradeList.Count > 0)
                 {
                     #region GenPropertyList
                     List<TradeProperty> propertyList = new List<TradeProperty>()
