@@ -1,4 +1,4 @@
-﻿/*using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Input;
+
 
 namespace elp87.Finance.Graphs
 {
@@ -32,15 +33,14 @@ namespace elp87.Finance.Graphs
             : this(grid)
         {
             this._tradeSystem = tradeSystem;
-            this._tradeSystem.CalcTradeProperties();
+            
         }
 
         public EquityGraph(Grid grid, List<ISysTrade> tradeList)
             : this(grid)
         {
-            this._tradeSystem = new TradeSystem();
-            this._tradeSystem.TradeList = tradeList;
-            this._tradeSystem.CalcTradeProperties();
+            this._tradeSystem = new TradeSystem(tradeList);
+            
         }
         #endregion
 
@@ -50,13 +50,13 @@ namespace elp87.Finance.Graphs
         {
             this._grid.Children.Clear();
 
-            DateTime minDate = this._tradeSystem.TradeList.Min(trade => trade.EntryDateTime);
-            DateTime maxDate = this._tradeSystem.TradeList.Max(trade => trade.ExitDateTime);
+            DateTime minDate = this._tradeSystem.Trades.Min(trade => trade.EntryDateTime);
+            DateTime maxDate = this._tradeSystem.Trades.Max(trade => trade.ExitDateTime);
             TimeSpan tRange = maxDate - minDate;
             double timeRange = tRange.TotalHours;
-            double maxProfit = this.maxGraphValue();
+            Money maxProfit = this.maxGraphValue();
             if (maxProfit < 0) maxProfit = 0;
-            double profitRange = maxProfit - this.minGraphValue();
+            Money profitRange = maxProfit - this.minGraphValue();
             double zeroLevel = (maxProfit / profitRange) * this._grid.ActualHeight;
             this._actualGridWidth = this._grid.ActualWidth - _sideBlockWidth;
 
@@ -73,22 +73,22 @@ namespace elp87.Finance.Graphs
         #endregion
 
         #region Private
-        private double maxGraphValue()
+        private Money maxGraphValue()
         {
-            double maxValue = 0;
-            double maxProfit = this._tradeSystem.TradeList.Max(trade => trade.CumProfit);
-            double maxLongValue = this.calcOneTypeProfitList(true).Max();
-            double maxShortValue = this.calcOneTypeProfitList(false).Max();
-            maxValue = Math.Max(maxLongValue, maxShortValue);
-            maxValue = Math.Max(maxValue, maxProfit);
+            Money maxValue = 0;
+            Money maxProfit = this._tradeSystem.Trades.Max(trade => trade.CumProfit);
+            Money maxLongValue = this.calcOneTypeProfitList(true).Max();
+            Money maxShortValue = this.calcOneTypeProfitList(false).Max();
+            maxValue = Math.Max(maxLongValue.Value, maxShortValue.Value);
+            maxValue = Math.Max(maxValue.Value, maxProfit.Value);
             return maxValue;
         }
 
-        private List<double> calcOneTypeProfitList(bool type)
+        private List<Money> calcOneTypeProfitList(bool type)
         {
-            List<double> profitList = new List<double>();
-            double cumProfit = 0;
-            foreach (Trade trade in this._tradeSystem.TradeList)
+            List<Money> profitList = new List<Money>();
+            Money cumProfit = 0;
+            foreach (Trade trade in this._tradeSystem.Trades)
             {
                 if (trade.IsLong == type)
                 {
@@ -100,18 +100,18 @@ namespace elp87.Finance.Graphs
             return profitList;
         }
 
-        private double minGraphValue()
+        private Money minGraphValue()
         {
-            double minValue = 0;
-            double maxDD = -this._tradeSystem.TradeList.Max(trade => trade.DrawDown);
-            double minLongValue = this.calcOneTypeProfitList(true).Min();
-            double minShortValue = this.calcOneTypeProfitList(false).Min();
-            minValue = Math.Min(minLongValue, minShortValue);
-            minValue = Math.Min(minValue, maxDD);
+            Money minValue = 0;
+            Money maxDD = -this._tradeSystem.Trades.Max(trade => trade.DrawDown);
+            Money minLongValue = this.calcOneTypeProfitList(true).Min();
+            Money minShortValue = this.calcOneTypeProfitList(false).Min();
+            minValue = Math.Min(minLongValue.Value, minShortValue.Value);
+            minValue = Math.Min(minValue.Value, maxDD.Value);
             return minValue;
         }
 
-        private double getHorizontalCell(double range)
+        private double getHorizontalCell(Money range)
         {
             double cell = 0.01;
             if (range > 0.1) cell = 0.05;
@@ -136,13 +136,13 @@ namespace elp87.Finance.Graphs
             sideBlock.Margin = new Thickness(gridWidth, 0, 0, 0);
         }
 
-        private void drawHorizontLines(double lineHeight, Grid tabGrid, double profitRange, double maxProfit, double gridWidth)
+        private void drawHorizontLines(double lineHeight, Grid tabGrid, Money profitRange, Money maxProfit, double gridWidth)
         {
             const int _labelTextOffsetPosition = 15;
 
-            double minValue = maxProfit - profitRange;
-            double maxGraphValue = maxProfit - (maxProfit % lineHeight);
-            double minGraphValue = minValue - (minValue % lineHeight);
+            Money minValue = maxProfit - profitRange;
+            double maxGraphValue = Convert.ToDouble(maxProfit) - (Convert.ToDouble(maxProfit.Value) % lineHeight);
+            double minGraphValue = Convert.ToDouble(minValue) - (Convert.ToDouble(minValue.Value) % lineHeight);
             for (double i = minGraphValue; i <= maxGraphValue; i += lineHeight)
             {
                 Line horLine = new Line();
@@ -160,10 +160,10 @@ namespace elp87.Finance.Graphs
             }
         }
 
-        private void drawMedianLine(double maxProfit, double profitRange, Grid tabGrid, double gridWidth)
+        private void drawMedianLine(Money maxProfit, Money profitRange, Grid tabGrid, double gridWidth)
         {
-            double min = Math.Min(this._tradeSystem.TradeList.Min(trade => trade.CumProfit), 0);
-            double max = Math.Max(this._tradeSystem.TradeList.Max(trade => trade.CumProfit), 0);
+            Money min = Math.Min(this._tradeSystem.Trades.Min(trade => trade.CumProfit).Value, 0);
+            Money max = Math.Max(this._tradeSystem.Trades.Max(trade => trade.CumProfit).Value, 0);
             Line medianLine = new Line();
             medianLine.Stroke = Brushes.Black;
             medianLine.X1 = 0;
@@ -173,7 +173,7 @@ namespace elp87.Finance.Graphs
             tabGrid.Children.Add(medianLine);
 
             Label txtLabel = new Label();
-            txtLabel.Content = maxProfit.ToString("0,0.0", System.Globalization.CultureInfo.CreateSpecificCulture("ru-RU"));
+            txtLabel.Content = maxProfit.Value.ToString("0,0.0", System.Globalization.CultureInfo.CreateSpecificCulture("ru-RU"));
             txtLabel.Margin = new Thickness(gridWidth, 0, 0, 0);
             txtLabel.VerticalAlignment = VerticalAlignment.Top;
             txtLabel.HorizontalAlignment = HorizontalAlignment.Left;
@@ -210,7 +210,7 @@ namespace elp87.Finance.Graphs
             }
         }
 
-        private void drawAllTradesEquity(double zeroLevel, DateTime minDate, double timeRange, Grid tabGrid, double profitRange, double maxProfit, double gridWidth)
+        private void drawAllTradesEquity(double zeroLevel, DateTime minDate, double timeRange, Grid tabGrid, Money profitRange, Money maxProfit, double gridWidth)
         {
             double x0, y0;
 
@@ -222,7 +222,7 @@ namespace elp87.Finance.Graphs
             x0 = 0;
             y0 = zeroLevel;
             equityLine.Points.Add(new Point(x0, y0));
-            foreach (ISysTrade curTrade in this._tradeSystem.TradeList)
+            foreach (ISysTrade curTrade in this._tradeSystem.Trades)
             {
                 double x1, y1;
                 TimeSpan tPosition = curTrade.ExitDateTime - minDate;
@@ -239,8 +239,8 @@ namespace elp87.Finance.Graphs
             tabGrid.Children.Add(equityLine);
 
             Label txtLabel = new Label();
-            txtLabel.Content = this._tradeSystem.TradeList.Last().CumProfit.ToString("0,0.0", System.Globalization.CultureInfo.CreateSpecificCulture("ru-RU"));
-            txtLabel.Margin = new Thickness(gridWidth, ((maxProfit - this._tradeSystem.TradeList.Last().CumProfit) / profitRange) * tabGrid.ActualHeight, 0, 0);
+            txtLabel.Content = this._tradeSystem.Trades.Last().CumProfit.Value.ToString("0,0.0", System.Globalization.CultureInfo.CreateSpecificCulture("ru-RU"));
+            txtLabel.Margin = new Thickness(gridWidth, ((maxProfit - this._tradeSystem.Trades.Last().CumProfit) / profitRange) * tabGrid.ActualHeight, 0, 0);
             txtLabel.VerticalAlignment = VerticalAlignment.Top;
             txtLabel.HorizontalAlignment = HorizontalAlignment.Left;
             txtLabel.Foreground = Brushes.White;
@@ -249,18 +249,18 @@ namespace elp87.Finance.Graphs
             tabGrid.Children.Add(txtLabel);
         }
 
-        private void drawLongTradesEquity(double zeroLevel, DateTime minDate, double timeRange, Grid tabGrid, double profitRange, double maxProfit, double gridWidth)
+        private void drawLongTradesEquity(double zeroLevel, DateTime minDate, double timeRange, Grid tabGrid, Money profitRange, Money maxProfit, double gridWidth)
         {
             double x0, y0;
             List<ISysTrade> longTradeList;
-            double curProfit = 0;
+            Money curProfit = 0;
             Polyline longTradesEquityLine = new Polyline();
             longTradesEquityLine.Stroke = Brushes.Blue;
             longTradesEquityLine.Points = new PointCollection();
             x0 = 0;
             y0 = zeroLevel;
             longTradesEquityLine.Points.Add(new Point(x0, y0));
-            longTradeList = this._tradeSystem.TradeList.FindAll(trade => trade.IsLong);
+            longTradeList = Array.FindAll(this._tradeSystem.Trades, trade => trade.IsLong).ToList();
             foreach (Trade curTrade in longTradeList)
             {
                 double x1, y1;
@@ -275,7 +275,7 @@ namespace elp87.Finance.Graphs
             tabGrid.Children.Add(longTradesEquityLine);
 
             Label txtLabel = new Label();
-            txtLabel.Content = curProfit.ToString("0,0.0", System.Globalization.CultureInfo.CreateSpecificCulture("ru-RU"));
+            txtLabel.Content = curProfit.Value.ToString("0,0.0", System.Globalization.CultureInfo.CreateSpecificCulture("ru-RU"));
             txtLabel.Margin = new Thickness(gridWidth, ((maxProfit - curProfit) / profitRange) * tabGrid.ActualHeight, 0, 0);
             txtLabel.VerticalAlignment = VerticalAlignment.Top;
             txtLabel.HorizontalAlignment = HorizontalAlignment.Left;
@@ -285,18 +285,18 @@ namespace elp87.Finance.Graphs
             tabGrid.Children.Add(txtLabel);
         }
 
-        private void drawShortTradesEquity(double zeroLevel, DateTime minDate, double timeRange, Grid tabGrid, double profitRange, double maxProfit, double gridWidth)
+        private void drawShortTradesEquity(double zeroLevel, DateTime minDate, double timeRange, Grid tabGrid, Money profitRange, Money maxProfit, double gridWidth)
         {
             double x0, y0;
             List<ISysTrade> shortTradeList;
-            double curProfit = 0;
+            Money curProfit = 0;
             Polyline longTradesEquityLine = new Polyline();
             longTradesEquityLine.Stroke = Brushes.Brown;
             longTradesEquityLine.Points = new PointCollection();
             x0 = 0;
             y0 = zeroLevel;
             longTradesEquityLine.Points.Add(new Point(x0, y0));
-            shortTradeList = this._tradeSystem.TradeList.FindAll(trade => !trade.IsLong);
+            shortTradeList = Array.FindAll(this._tradeSystem.Trades, trade => !trade.IsLong).ToList();
             foreach (Trade curTrade in shortTradeList)
             {
                 double x1, y1;
@@ -311,7 +311,7 @@ namespace elp87.Finance.Graphs
             tabGrid.Children.Add(longTradesEquityLine);
 
             Label txtLabel = new Label();
-            txtLabel.Content = curProfit.ToString("0,0.0", System.Globalization.CultureInfo.CreateSpecificCulture("ru-RU"));
+            txtLabel.Content = curProfit.Value.ToString("0,0.0", System.Globalization.CultureInfo.CreateSpecificCulture("ru-RU"));
             txtLabel.Margin = new Thickness(gridWidth, ((maxProfit - curProfit) / profitRange) * tabGrid.ActualHeight, 0, 0);
             txtLabel.VerticalAlignment = VerticalAlignment.Top;
             txtLabel.HorizontalAlignment = HorizontalAlignment.Left;
@@ -321,7 +321,7 @@ namespace elp87.Finance.Graphs
             tabGrid.Children.Add(txtLabel);
         }
 
-        private void drawDownEquity(double zeroLevel, DateTime minDate, double timeRange, Grid tabGrid, double profitRange, double maxProfit, double gridWidth)
+        private void drawDownEquity(double zeroLevel, DateTime minDate, double timeRange, Grid tabGrid, Money profitRange, Money maxProfit, double gridWidth)
         {
             double x0, y0;
             Polyline drawDawnLine = new Polyline();
@@ -331,7 +331,7 @@ namespace elp87.Finance.Graphs
             x0 = 0;
             y0 = zeroLevel;
             drawDawnLine.Points.Add(new Point(x0, y0));
-            foreach (ISysTrade curTrade in this._tradeSystem.TradeList)
+            foreach (ISysTrade curTrade in this._tradeSystem.Trades)
             {
                 double x1, y1;
                 TimeSpan tPosition = curTrade.ExitDateTime - minDate;
@@ -343,8 +343,8 @@ namespace elp87.Finance.Graphs
             tabGrid.Children.Add(drawDawnLine);
 
             Label txtLabel = new Label();
-            txtLabel.Content = this._tradeSystem.TradeList.Last().DrawDown.ToString("0,0.0", System.Globalization.CultureInfo.CreateSpecificCulture("ru-RU"));
-            txtLabel.Margin = new Thickness(gridWidth, (((maxProfit + this._tradeSystem.TradeList.Last().DrawDown) / profitRange) * tabGrid.ActualHeight) - 23, 0, 0);
+            txtLabel.Content = this._tradeSystem.Trades.Last().DrawDown.Value.ToString("0,0.0", System.Globalization.CultureInfo.CreateSpecificCulture("ru-RU"));
+            txtLabel.Margin = new Thickness(gridWidth, (((maxProfit + this._tradeSystem.Trades.Last().DrawDown) / profitRange) * tabGrid.ActualHeight) - 23, 0, 0);
             txtLabel.VerticalAlignment = VerticalAlignment.Top;
             txtLabel.HorizontalAlignment = HorizontalAlignment.Left;
             txtLabel.Foreground = Brushes.White;
@@ -357,7 +357,7 @@ namespace elp87.Finance.Graphs
         #region Event Handlers
         private void grid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (this._tradeSystem != null && this._tradeSystem.TradeList.Count != 0)
+            if (this._tradeSystem != null && this._tradeSystem.Trades.Length != 0)
             {
                 this.DrawGraph();
             }
@@ -369,8 +369,8 @@ namespace elp87.Finance.Graphs
             string ttContent;
             ToolTip tt = new ToolTip();
             x = e.GetPosition((Polyline)sender).X;
-            DateTime maxDate = this._tradeSystem.TradeList.Max(trade => trade.ExitDateTime);
-            DateTime minDate = this._tradeSystem.TradeList.Min(trade => trade.EntryDateTime);
+            DateTime maxDate = this._tradeSystem.Trades.Max(trade => trade.ExitDateTime);
+            DateTime minDate = this._tradeSystem.Trades.Min(trade => trade.EntryDateTime);
             TimeSpan tRange = maxDate - minDate;
             double timeRange = tRange.TotalDays;
             int xDay = Convert.ToInt32((x * timeRange) / this._actualGridWidth);
@@ -378,10 +378,10 @@ namespace elp87.Finance.Graphs
             DateTime thisDay = minDate + xDaySpan;
             ttContent = thisDay.Day + "." + thisDay.Month + "." + thisDay.Year + ":";
 
-            var getInfo = from trade in this._tradeSystem.TradeList
+            var getInfo = from trade in this._tradeSystem.Trades
                           where ((trade.ExitDateTime).Date == thisDay.Date)
                           select trade.CumProfit;
-            foreach (double profits in getInfo)
+            foreach (Money profits in getInfo)
             {
                 ttContent += '\n' + profits.ToString();
             }
@@ -393,4 +393,3 @@ namespace elp87.Finance.Graphs
         #endregion
     }
 }
-*/
