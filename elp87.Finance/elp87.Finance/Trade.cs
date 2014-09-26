@@ -77,5 +77,38 @@ namespace elp87.Finance
             set { _isLong = value; }
         }
         #endregion
+
+        #region Methods
+        public override bool Equals(System.Object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            Trade eqTrade = obj as Trade;
+            if (eqTrade == null) return false;
+
+
+            if ((this.EntryDateTime == eqTrade.EntryDateTime) &&
+                this.EntryPrice.Equals(eqTrade.EntryPrice) &&
+                (this.ExitDateTime == eqTrade.ExitDateTime) &&
+                this.ExitPrice.Equals(eqTrade.ExitPrice) &&
+                (this.Count == eqTrade.Count) &&
+                (this.IsLong == eqTrade.IsLong))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            } 
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+        #endregion
     }
 }

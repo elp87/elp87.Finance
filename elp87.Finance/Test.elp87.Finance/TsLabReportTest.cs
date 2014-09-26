@@ -13,7 +13,7 @@ namespace Test.elp87.Finance
         public TsLabReportTest()
         {
             expList = new List<ISysTrade>();
-            expList.Add(new SysTrade() { IsLong = false, Count = 1, EntryDateTime = new DateTime(2014, 09, 16, 10, 00, 00), EntryPrice = 117410, ExitDateTime = new DateTime(2014, 09, 16, 11, 00, 00), ExitPrice = 117780 });
+            expList.Add(new TsLabTrade() { IsLong = false, Count = 1, EntryDateTime = new DateTime(2014, 09, 16, 10, 00, 00), EntryPrice = 117410, ExitDateTime = new DateTime(2014, 09, 16, 11, 00, 00), ExitPrice = 117780 });
         }
 
         [TestMethod]
@@ -23,7 +23,7 @@ namespace Test.elp87.Finance
 
             for (int i = 0; i < expList.Count; i++)
             {
-                Assert.AreEqual(expList[i], trades[i]);
+                Assert.AreEqual((Trade)expList[i], (Trade)trades[i]);
             }
         }
     }

@@ -39,6 +39,11 @@
 
             return (this.Value == value.Value);
         }
+
+        public override int GetHashCode()
+        {
+            return (int)this.Value;
+        }
         #endregion
 
         #region Operators

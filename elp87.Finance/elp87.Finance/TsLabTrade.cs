@@ -28,5 +28,15 @@ namespace elp87.Finance
         {
             set { _exitPrice = Convert.ToDecimal(value); }
         }
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }

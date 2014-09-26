@@ -15,5 +15,14 @@
         public double DrawDownPC { get; set; }
 
         public bool NewContract { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }
