@@ -91,9 +91,9 @@ namespace elp87.Finance
 
 
             if ((this.EntryDateTime == eqTrade.EntryDateTime) &&
-                this.EntryPrice.Equals(eqTrade.EntryPrice) &&
+                (this.EntryPrice == eqTrade.EntryPrice) &&
                 (this.ExitDateTime == eqTrade.ExitDateTime) &&
-                this.ExitPrice.Equals(eqTrade.ExitPrice) &&
+                (this.ExitPrice == eqTrade.ExitPrice) &&
                 (this.Count == eqTrade.Count) &&
                 (this.IsLong == eqTrade.IsLong))
             {

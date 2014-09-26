@@ -106,6 +106,16 @@
         {
             return (a.Value <= b.Value);
         }
+
+        public static bool operator ==(Money a, Money b)
+        {
+            return a.Equals(b);
+        }
+
+        public static bool operator !=(Money a, Money b)
+        {
+            return !a.Equals(b);
+        }
         
         #region Implicit
         public static implicit operator Money(int value)
