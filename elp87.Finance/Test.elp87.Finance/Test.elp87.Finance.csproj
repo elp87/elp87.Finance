@@ -58,12 +58,19 @@
     <Compile Include="MoneyTest.cs" />
     <Compile Include="TradeTest.cs" />
     <Compile Include="SysTradeTest.cs" />
+    <Compile Include="TsLabReportTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\elp87.Finance\elp87.Finance.csproj">
       <Project>{53d80424-7867-4704-8994-9490b1aaac22}</Project>
       <Name>elp87.Finance</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="files\Elder070301_-_140421.csv" />
+    <None Include="files\trades.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

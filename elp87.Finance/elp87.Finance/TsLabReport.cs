@@ -28,7 +28,7 @@ namespace elp87.Finance
             csv.AddColumn("TsLabExitDateTime", _exitDateColumnIndex);
             csv.AddColumn("TsLabExitPrice", _exitPriceColumnIndex);
             CSVFileTrades = (List<TsLabTrade>)csv.finalList;
-            CSVFileTrades.RemoveAll(trade => trade.ExitPrice.Equals(0));
+            CSVFileTrades.RemoveAll(trade => trade.ExitPrice.Equals(new Money(0)));
 
             IEnumerable<ISysTrade> itradeEnumerable = (IEnumerable<TsLabTrade>)CSVFileTrades;
 

@@ -21,12 +21,12 @@ namespace elp87.Finance
 
         public string TsLabEntryPrice
         {
-            set { _entryPrice = Convert.ToDouble(value); }
+            set { _entryPrice = Convert.ToDecimal(value); }
         }
 
         public string TsLabExitPrice
         {
-            set { _exitPrice = Convert.ToDouble(value); }
+            set { _exitPrice = Convert.ToDecimal(value); }
         }
     }
 }
