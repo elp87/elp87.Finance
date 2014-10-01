@@ -44,6 +44,8 @@ namespace Test.elp87.Finance
             List<ISysTrade> trades = TSLabReport.ReadReport(@"files\trades.csv");
 
             CollectionAssert.AreEqual(expList, trades);
+
+            
         }
     }
 }

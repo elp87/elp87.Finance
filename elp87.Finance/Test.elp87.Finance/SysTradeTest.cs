@@ -68,6 +68,7 @@ namespace Test.elp87.Finance
                     IsLong = false
                 }
             );
+            system.CalcTradeProperties();
             
         }
 

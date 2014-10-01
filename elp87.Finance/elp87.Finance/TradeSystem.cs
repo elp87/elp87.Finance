@@ -27,12 +27,7 @@ namespace elp87.Finance
         {
             get
             {
-                ISysTrade[] trades = new ISysTrade[this._tradeList.Count];
-                for (int i = 0; i < trades.Length; i++)
-                {
-                    trades[i] = this._tradeList[i];
-                }
-                return trades;
+                return this._tradeList.ToArray();
             }
         }
 
@@ -53,12 +48,12 @@ namespace elp87.Finance
         public void AddTrade(ISysTrade trade)
         {
             this._tradeList.Add(trade);
-            this.CalcTradeProperties();
+            // CalcTradeProperties() очень тяжелый. Пихать сюда его не нужно. Запускать только после полного сбора списка сделок, а не после добавления каждого трейда
         }
         #endregion
 
         #region Protected
-        protected void CalcTradeProperties()
+        public void CalcTradeProperties()
         {
             if (this._tradeList.Count > 0)
             {

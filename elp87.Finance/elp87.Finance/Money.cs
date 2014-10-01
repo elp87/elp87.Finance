@@ -1,6 +1,8 @@
-﻿namespace elp87.Finance
+﻿using System;
+
+namespace elp87.Finance
 {
-    public class Money
+    public class Money : IComparable
     {
         #region Fields
         private decimal _value;
@@ -28,6 +30,7 @@
         #endregion
 
         #region Methods
+        #region Override
         public override string ToString()
         {
             return this._value.ToString();
@@ -35,6 +38,7 @@
 
         public override bool Equals(object obj)
         {
+            if (obj == null) return false;
             Money value = ((Money)obj).Value;
 
             return (this.Value == value.Value);
@@ -43,7 +47,25 @@
         public override int GetHashCode()
         {
             return (int)this.Value;
-        }
+        } 
+        #endregion
+
+        #region Interfaces
+        public int CompareTo(object obj)
+        {
+            if (obj == null) return 1;
+
+            Money otherMoney = obj as Money;
+            if (otherMoney != null)
+            {
+                return this.Value.CompareTo(otherMoney.Value);
+            }
+            else
+            {
+                throw new ArgumentException("Object is not Money");
+            }
+        } 
+        #endregion
         #endregion
 
         #region Operators
@@ -134,5 +156,7 @@
         }
         #endregion
         #endregion
+
+        
     }
 }

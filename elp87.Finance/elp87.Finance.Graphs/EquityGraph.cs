@@ -141,8 +141,8 @@ namespace elp87.Finance.Graphs
             const int _labelTextOffsetPosition = 15;
 
             Money minValue = maxProfit - profitRange;
-            double maxGraphValue = Convert.ToDouble(maxProfit) - (Convert.ToDouble(maxProfit.Value) % lineHeight);
-            double minGraphValue = Convert.ToDouble(minValue) - (Convert.ToDouble(minValue.Value) % lineHeight);
+            double maxGraphValue = Convert.ToDouble(maxProfit.Value) - (Convert.ToDouble(maxProfit.Value) % lineHeight);
+            double minGraphValue = Convert.ToDouble(minValue.Value) - (Convert.ToDouble(minValue.Value) % lineHeight);
             for (double i = minGraphValue; i <= maxGraphValue; i += lineHeight)
             {
                 Line horLine = new Line();
