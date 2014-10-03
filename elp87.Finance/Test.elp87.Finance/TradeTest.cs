@@ -99,5 +99,59 @@ namespace Test.elp87.Finance
                 Assert.AreEqual(expProfits[i], _trades[i].ProfitPC, 0.01);
             }
         }
+
+        [TestMethod]
+        public void TestClone()
+        {
+            object[] cloneTrades = new object[_trades.Length];
+
+            for (int i = 0; i < cloneTrades.Length; i++)
+            {
+                cloneTrades[i] = _trades[i].Clone();
+            }
+
+            for (int i = 0; i < cloneTrades.Length; i++)
+            {
+                Assert.AreEqual(_trades[i], (Trade)cloneTrades[i]);
+            }
+        }
+
+        [TestMethod]
+        public void TestDeepCloneForEntryPrice()
+        {
+            Trade trade = new Trade()
+            {
+                EntryDateTime = new DateTime(2014, 10, 3, 10, 15, 37),
+                EntryPrice = 127356m,
+                ExitDateTime = new DateTime(2014, 10, 3, 11, 13, 16),
+                ExitPrice = 128567m,
+                Count = 1,
+                IsLong = true
+            };
+
+            Trade cloneTrade = trade.Clone() as Trade;
+            trade.EntryPrice = 127000m;
+            
+            Assert.AreNotEqual(trade, cloneTrade);
+        }
+
+        [TestMethod]
+        public void TestDeepCloneForEntryDateTime()
+        {
+            Trade trade = new Trade()
+            {
+                EntryDateTime = new DateTime(2014, 10, 3, 10, 15, 37),
+                EntryPrice = 127356m,
+                ExitDateTime = new DateTime(2014, 10, 3, 11, 13, 16),
+                ExitPrice = 128567m,
+                Count = 1,
+                IsLong = true
+            };
+
+            Trade cloneTrade = trade.Clone() as Trade;
+            trade.EntryDateTime = new DateTime(2014, 10, 3, 0, 0, 0);
+
+            Assert.AreNotEqual(trade, cloneTrade);
+        }
     }
 }

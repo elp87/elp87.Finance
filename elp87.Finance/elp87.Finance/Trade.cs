@@ -2,7 +2,7 @@
 
 namespace elp87.Finance
 {
-    public class Trade : ITrade
+    public class Trade : ITrade, ICloneable
     {
         #region Fields
         protected DateTime _entryDateTime;
@@ -109,6 +109,12 @@ namespace elp87.Finance
         {
             return base.GetHashCode();
         }
-        #endregion
+
+        public object Clone()
+        {
+            Trade cloneTrade = this.MemberwiseClone() as Trade;
+            return cloneTrade;
+        }
+        #endregion        
     }
 }
