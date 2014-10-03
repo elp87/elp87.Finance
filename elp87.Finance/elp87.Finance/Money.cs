@@ -2,7 +2,7 @@
 
 namespace elp87.Finance
 {
-    public class Money : IComparable
+    public class Money : IComparable, ICloneable
     {
         #region Fields
         private decimal _value;
@@ -64,7 +64,12 @@ namespace elp87.Finance
             {
                 throw new ArgumentException("Object is not Money");
             }
-        } 
+        }
+
+        public object Clone()
+        {
+            return new Money(this._value);
+        }
         #endregion
         #endregion
 

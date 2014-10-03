@@ -292,5 +292,25 @@ namespace Test.elp87.Finance
 
             CollectionAssert.AreEqual(expResults, Results);
         }
+
+        [TestMethod]
+        public void TestClone()
+        {
+            Money[] moneyArray = new Money[decValues.Length];
+            object[] cloneArray = new object[decValues.Length];
+
+            for (int i = 0; i < moneyArray.Length; i++)
+            {
+                moneyArray[i] = new Money(decValues[i]);
+            }
+            for (int i = 0; i < cloneArray.Length; i++)
+            {
+                cloneArray[i] = moneyArray[i].Clone();
+            }
+            for (int i = 0; i < cloneArray.Length; i++)
+            {
+                Assert.AreEqual(moneyArray[i], (Money)cloneArray[i]);
+            }
+        }
     }
 }
