@@ -1,6 +1,8 @@
-﻿namespace elp87.Finance
+﻿using System;
+
+namespace elp87.Finance
 {
-    public interface ISysTrade : ITrade
+    public interface ISysTrade : ITrade, IComparable<ISysTrade>
     {
         Money CumProfit { get; set; }
         double CumProfitPC { get; set; }

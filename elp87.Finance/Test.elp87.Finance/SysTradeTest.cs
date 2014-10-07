@@ -151,5 +151,71 @@ namespace Test.elp87.Finance
                 Assert.AreEqual(expValue[i], system.Trades[i].NewContract);
             }
         }
+
+        [TestMethod]
+        public void TestSort()
+        {
+            TradeSystem sortSystem = new TradeSystem();
+            sortSystem.AddTrade(
+                new SysTrade()
+                {
+                    EntryDateTime = new DateTime(2014, 1, 3, 10, 0, 0),
+                    ExitDateTime = new DateTime(2014, 1, 3, 11, 0, 0),
+                    EntryPrice = 100,
+                    ExitPrice = 101,
+                    Count = 1,
+                    IsLong = true
+                }
+                );
+            sortSystem.AddTrade(
+                new SysTrade()
+                {
+                    EntryDateTime = new DateTime(2014, 1, 3, 12, 0, 0),
+                    ExitDateTime = new DateTime(2014, 1, 3, 13, 0, 0),
+                    EntryPrice = 100,
+                    ExitPrice = 101,
+                    Count = 2,
+                    IsLong = true
+                }
+                );
+            sortSystem.AddTrade(
+                new SysTrade()
+                {
+                    EntryDateTime = new DateTime(2014, 1, 2, 10, 0, 0),
+                    ExitDateTime = new DateTime(2014, 1, 2, 11, 0, 0),
+                    EntryPrice = 100,
+                    ExitPrice = 101,
+                    Count = 2,
+                    IsLong = false
+                }
+                );
+            sortSystem.AddTrade(
+                new SysTrade()
+                {
+                    EntryDateTime = new DateTime(2014, 1, 1, 10, 0, 0),
+                    ExitDateTime = new DateTime(2014, 1, 1, 11, 0, 0),
+                    EntryPrice = 387,
+                    ExitPrice = 215,
+                    Count = 2,
+                    IsLong = false, 
+                    NewContract = true
+                }
+                );
+            sortSystem.AddTrade(
+                new SysTrade()
+                {
+                    EntryDateTime = new DateTime(2014, 1, 1, 15, 0, 0),
+                    ExitDateTime = new DateTime(2014, 1, 1, 16, 0, 0),
+                    EntryPrice = 387.75,
+                    ExitPrice = 215.16,
+                    Count = 2,
+                    IsLong = false
+                }
+            );
+            sortSystem.Sort();
+            sortSystem.CalcTradeProperties();
+
+            
+        }
     }
 }

@@ -79,6 +79,7 @@ namespace elp87.Finance
         #endregion
 
         #region Methods
+        #region Override
         public override bool Equals(System.Object obj)
         {
             if (obj == null)
@@ -102,19 +103,24 @@ namespace elp87.Finance
             else
             {
                 return false;
-            } 
+            }
         }
 
         public override int GetHashCode()
         {
             return base.GetHashCode();
-        }
+        } 
+        #endregion
 
+        #region Interfaces
         public object Clone()
         {
             Trade cloneTrade = this.MemberwiseClone() as Trade;
             return cloneTrade;
         }
-        #endregion        
+        #endregion
+        #endregion
+
+        
     }
 }

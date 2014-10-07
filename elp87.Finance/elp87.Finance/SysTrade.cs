@@ -1,4 +1,6 @@
-﻿namespace elp87.Finance
+﻿using System;
+
+namespace elp87.Finance
 {
     public class SysTrade : Trade, ISysTrade
     {
@@ -23,6 +25,18 @@
         public override int GetHashCode()
         {
             return base.GetHashCode();
+        }
+
+        public int CompareTo(ISysTrade other)
+        {
+            if (other != null)
+            {
+                return this.ExitDateTime.CompareTo(other.ExitDateTime);
+            }
+            else
+            {
+                throw new ArgumentException();
+            }
         }
     }
 }

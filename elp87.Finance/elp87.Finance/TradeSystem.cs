@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -49,6 +50,13 @@ namespace elp87.Finance
         {
             this._tradeList.Add(trade);
             // CalcTradeProperties() очень тяжелый. Пихать сюда его не нужно. Запускать только после полного сбора списка сделок, а не после добавления каждого трейда
+        }
+
+        public void Sort()
+        {
+            this._tradeList.Sort();
+            int a = 1;
+            a++;
         }
         #endregion
 
