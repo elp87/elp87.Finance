@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -55,8 +54,6 @@ namespace elp87.Finance
         public void Sort()
         {
             this._tradeList.Sort();
-            int a = 1;
-            a++;
         }
         #endregion
 

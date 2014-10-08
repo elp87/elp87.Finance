@@ -62,6 +62,7 @@
     </Compile>
     <Compile Include="SysTrade.cs" />
     <Compile Include="Trade.cs" />
+    <Compile Include="TradeDay.cs" />
     <Compile Include="TradeSystem.cs" />
     <Compile Include="TradeSystemProperties.cs" />
     <Compile Include="TsLabReport.cs" />
