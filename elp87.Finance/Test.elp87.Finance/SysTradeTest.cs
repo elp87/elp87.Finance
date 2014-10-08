@@ -53,7 +53,7 @@ namespace Test.elp87.Finance
                     EntryPrice = 387,
                     ExitPrice = 215,
                     Count = 2,
-                    IsLong = false, 
+                    IsLong = false,
                     NewContract = true
                 }
                 );
@@ -69,13 +69,13 @@ namespace Test.elp87.Finance
                 }
             );
             system.CalcTradeProperties();
-            
+
         }
 
         [TestMethod]
         public void TestCumProfit()
         {
-            Money[] expCumProfit = new Money[] {1, 3, 1, 345, 690.18} ;
+            Money[] expCumProfit = new Money[] { 1, 3, 1, 345, 690.18 };
 
             for (int i = 0; i < expCumProfit.Length; i++)
             {
@@ -121,7 +121,7 @@ namespace Test.elp87.Finance
         [TestMethod]
         public void TestDrawDown()
         {
-            Money[] expDD = new Money[] { 0, 0, 2, 0, 0};
+            Money[] expDD = new Money[] { 0, 0, 2, 0, 0 };
 
             for (int i = 0; i < expDD.Length; i++)
             {
@@ -132,7 +132,7 @@ namespace Test.elp87.Finance
         [TestMethod]
         public void TestDrawDownPC()
         {
-            double[] expDDPC = new double[] {0, 0, 0.99, 0, 0 };
+            double[] expDDPC = new double[] { 0, 0, 0.99, 0, 0 };
             double delta = 0.01;
 
             for (int i = 0; i < expDDPC.Length; i++)
@@ -155,9 +155,7 @@ namespace Test.elp87.Finance
         [TestMethod]
         public void TestSort()
         {
-            TradeSystem sortSystem = new TradeSystem();
-            sortSystem.AddTrade(
-                new SysTrade()
+            SysTrade trade0 = new SysTrade()
                 {
                     EntryDateTime = new DateTime(2014, 1, 3, 10, 0, 0),
                     ExitDateTime = new DateTime(2014, 1, 3, 11, 0, 0),
@@ -165,10 +163,8 @@ namespace Test.elp87.Finance
                     ExitPrice = 101,
                     Count = 1,
                     IsLong = true
-                }
-                );
-            sortSystem.AddTrade(
-                new SysTrade()
+                };
+            SysTrade trade1 = new SysTrade()
                 {
                     EntryDateTime = new DateTime(2014, 1, 3, 12, 0, 0),
                     ExitDateTime = new DateTime(2014, 1, 3, 13, 0, 0),
@@ -176,10 +172,8 @@ namespace Test.elp87.Finance
                     ExitPrice = 101,
                     Count = 2,
                     IsLong = true
-                }
-                );
-            sortSystem.AddTrade(
-                new SysTrade()
+                };
+            SysTrade trade2 = new SysTrade()
                 {
                     EntryDateTime = new DateTime(2014, 1, 2, 10, 0, 0),
                     ExitDateTime = new DateTime(2014, 1, 2, 11, 0, 0),
@@ -187,22 +181,18 @@ namespace Test.elp87.Finance
                     ExitPrice = 101,
                     Count = 2,
                     IsLong = false
-                }
-                );
-            sortSystem.AddTrade(
-                new SysTrade()
+                };
+            SysTrade trade3 = new SysTrade()
                 {
                     EntryDateTime = new DateTime(2014, 1, 1, 10, 0, 0),
                     ExitDateTime = new DateTime(2014, 1, 1, 11, 0, 0),
                     EntryPrice = 387,
                     ExitPrice = 215,
                     Count = 2,
-                    IsLong = false, 
+                    IsLong = false,
                     NewContract = true
-                }
-                );
-            sortSystem.AddTrade(
-                new SysTrade()
+                };
+            SysTrade trade4 = new SysTrade()
                 {
                     EntryDateTime = new DateTime(2014, 1, 1, 15, 0, 0),
                     ExitDateTime = new DateTime(2014, 1, 1, 16, 0, 0),
@@ -210,12 +200,25 @@ namespace Test.elp87.Finance
                     ExitPrice = 215.16,
                     Count = 2,
                     IsLong = false
-                }
-            );
+                };
+            TradeSystem expSystem = new TradeSystem();
+            expSystem.AddTrade(trade3);
+            expSystem.AddTrade(trade4);
+            expSystem.AddTrade(trade2);
+            expSystem.AddTrade(trade0);
+            expSystem.AddTrade(trade1);
+            expSystem.CalcTradeProperties();
+
+            TradeSystem sortSystem = new TradeSystem();
+            sortSystem.AddTrade(trade0);
+            sortSystem.AddTrade(trade1);
+            sortSystem.AddTrade(trade2);
+            sortSystem.AddTrade(trade3);
+            sortSystem.AddTrade(trade4);
             sortSystem.Sort();
             sortSystem.CalcTradeProperties();
 
-            
+            CollectionAssert.AreEqual(expSystem.Trades, sortSystem.Trades);
         }
     }
 }
