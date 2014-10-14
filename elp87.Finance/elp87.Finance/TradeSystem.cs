@@ -31,6 +31,14 @@ namespace elp87.Finance
             }
         }
 
+        public List<ISysTrade> TradeList
+        {
+            get
+            {
+                return this._tradeList;
+            }
+        }
+
         public string Name { get; set; }
 
         public string Ticker { get; set; }

@@ -9,6 +9,7 @@ namespace Test.elp87.Finance
     public class TradeSystemPropertiesTest
     {
         private TradeSystem sys1;
+        private TradeSystem oneTradeSystem;
 
         public TradeSystemPropertiesTest()
         {
@@ -123,6 +124,9 @@ namespace Test.elp87.Finance
                 ExitPrice = 134850
             };
             sys1.AddTrade(trade9);
+
+            oneTradeSystem = new TradeSystem();
+            oneTradeSystem.AddTrade(trade0);
         }
 
         [TestMethod]
@@ -435,6 +439,12 @@ namespace Test.elp87.Finance
             Assert.AreEqual(expAll, sys1.Properties.PayoffRatioAll);
             Assert.AreEqual(expLong, sys1.Properties.PayoffRatioLong);
             Assert.AreEqual(expShort, sys1.Properties.PayoffRatioShort);
+        }
+
+        [TestMethod]
+        public void TestPropertiesOneTradeSystem()
+        {
+            oneTradeSystem.CalcTradeProperties();
         }
     }
 }
