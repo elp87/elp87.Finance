@@ -76,6 +76,15 @@ namespace elp87.Finance
             get { return _isLong; }
             set { _isLong = value; }
         }
+
+        public string DealType
+        {
+            get
+            {
+                if (_isLong) return "Long";
+                else return "Short";
+            }
+        }
         #endregion
 
         #region Methods
