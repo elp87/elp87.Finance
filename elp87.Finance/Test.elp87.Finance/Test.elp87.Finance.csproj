@@ -64,6 +64,7 @@
     <Compile Include="TradeTest.cs" />
     <Compile Include="SysTradeTest.cs" />
     <Compile Include="TsLabReportTest.cs" />
+    <Compile Include="TradeDayTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\elp87.Finance.Graphs\elp87.Finance.Graphs.csproj">
