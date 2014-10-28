@@ -44,7 +44,7 @@ namespace Test.elp87.Finance.Graphs
         public void TestEquityGraph()
         {
             Grid grid = new Grid();
-            EquityGraph eqGraph = new EquityGraph(grid, trades);
+            SystemEquityGraph eqGraph = new SystemEquityGraph(grid, trades);
             eqGraph.DrawGraph();
         }
     }

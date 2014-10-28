@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EquityGraph.cs" />
+    <Compile Include="SystemEquityGraph.cs" />
     <Compile Include="IGraph.cs" />
     <Compile Include="PointData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
