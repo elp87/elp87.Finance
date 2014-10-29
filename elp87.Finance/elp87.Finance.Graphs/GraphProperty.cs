@@ -4,6 +4,14 @@ namespace elp87.Finance.Graphs
 {
     public class GraphProperty
     {
+        public GraphProperty()
+        {
+            this.Stroke = null;
+            this.Fill = null;
+            this.Opacity = 1;
+            this.StrokeThickness = 1;
+        }
+
         /// <summary>
         /// Возвращает или задает объект <see cref="System.Windows.Media.Brush"/>, определяющий способ рисования линии графика
         /// </summary>
