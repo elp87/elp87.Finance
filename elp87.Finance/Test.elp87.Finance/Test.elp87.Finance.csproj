@@ -67,10 +67,6 @@
     <Compile Include="TradeDayTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\elp87.Finance.Graphs\elp87.Finance.Graphs.csproj">
-      <Project>{7227bb76-85c2-441a-8b0a-c82cb769f500}</Project>
-      <Name>elp87.Finance.Graphs</Name>
-    </ProjectReference>
     <ProjectReference Include="..\elp87.Finance\elp87.Finance.csproj">
       <Project>{53d80424-7867-4704-8994-9490b1aaac22}</Project>
       <Name>elp87.Finance</Name>

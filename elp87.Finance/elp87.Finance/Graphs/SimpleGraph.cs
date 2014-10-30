@@ -204,9 +204,12 @@ namespace elp87.Finance.Graphs
                 equityLine.Points.Add((Point)equityPoint);
             }
 
-            x0 = gridWidth;
-            y0 = (maxValue / profitRange) * this._grid.ActualHeight;
-            equityLine.Points.Add(new Point(x0, y0));
+            if (graph.Property.Fill != null)
+            {
+                x0 = gridWidth;
+                y0 = (maxValue / profitRange) * this._grid.ActualHeight;
+                equityLine.Points.Add(new Point(x0, y0));
+            }
 
             this._grid.Children.Add(equityLine);
         }
@@ -215,7 +218,7 @@ namespace elp87.Finance.Graphs
         #region Event Handlers
         private void grid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            throw new NotImplementedException();
+            
         } 
         #endregion 
         #endregion        

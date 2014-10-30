@@ -35,19 +35,29 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>libs\elp87.Helpers.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Filter\FilterDay.cs" />
     <Compile Include="Filter\FilterResult.cs" />
     <Compile Include="Filter\FilterSet.cs" />
+    <Compile Include="Graphs\EquityGraph.cs" />
+    <Compile Include="Graphs\GraphData.cs" />
+    <Compile Include="Graphs\GraphProperty.cs" />
+    <Compile Include="Graphs\IGraph.cs" />
+    <Compile Include="Graphs\PointData.cs" />
+    <Compile Include="Graphs\SimpleGraph.cs" />
+    <Compile Include="Graphs\SystemEquityGraph.cs" />
     <Compile Include="Helpers\Compare.cs" />
     <Compile Include="Helpers\Convert.cs" />
     <Compile Include="Helpers\LinqExts.cs" />
