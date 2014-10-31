@@ -172,6 +172,8 @@ namespace elp87.Finance.Graphs
 
             Polyline equityLine = new Polyline();
 
+            equityLine.Tag = graph;
+
             if (graph.Property.Stroke != null)
             {
                 equityLine.Stroke = graph.Property.Stroke;
@@ -186,6 +188,11 @@ namespace elp87.Finance.Graphs
             }
             equityLine.StrokeThickness = graph.Property.StrokeThickness;
             equityLine.Opacity = graph.Property.Opacity;
+
+            if (graph.Property.Fill != null)
+            {
+                equityLine.MouseEnter += equityLine_MouseEnter;
+            }
 
             equityLine.Points = new PointCollection();
 
@@ -213,12 +220,18 @@ namespace elp87.Finance.Graphs
 
             this._grid.Children.Add(equityLine);
         }
+
+        void equityLine_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            Polyline line = sender as Polyline;
+            GraphData data = line.Tag as GraphData;
+        }
         #endregion
 
         #region Event Handlers
         private void grid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            
+            this.DrawGraph();
         } 
         #endregion 
         #endregion        
