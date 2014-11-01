@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Text;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System.Collections.Generic;
 
 namespace elp87.Finance.Graphs
 {
@@ -219,20 +221,42 @@ namespace elp87.Finance.Graphs
             }
 
             this._grid.Children.Add(equityLine);
-        }
-
-        void equityLine_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            Polyline line = sender as Polyline;
-            GraphData data = line.Tag as GraphData;
-        }
+        }        
         #endregion
 
         #region Event Handlers
         private void grid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             this.DrawGraph();
-        } 
+        }
+
+        void equityLine_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            Polyline line = sender as Polyline;
+            GraphData data = line.Tag as GraphData;
+
+            double x = e.GetPosition(line).X;
+            StringBuilder ttContent = new StringBuilder();
+            ToolTip toolTip = new ToolTip();
+            DateTime minDate = data.Points.Min(point => point.Date);
+            DateTime maxDate = data.Points.Max(point => point.Date);
+            double timeRange = (maxDate - minDate).TotalDays;
+
+            int dayOffsetValue = Convert.ToInt32((x * timeRange) / this._actualGridWidth);
+            TimeSpan xDaySpan = new TimeSpan(dayOffsetValue, 0, 0, 0);
+            DateTime xDay = minDate + xDaySpan;
+            ttContent.Append(xDay.ToShortDateString() + ":");
+
+            IEnumerable<Money> xDayPointValues = data.Points.Where(point => point.Date.Date == xDay.Date).Select(point => point.Value);
+
+            foreach (Money value in xDayPointValues)
+            {
+                ttContent.Append('\n' + value.ToString());
+            }
+
+            toolTip.Content = ttContent.ToString();
+            line.ToolTip = toolTip;
+        }
         #endregion 
         #endregion        
     }
