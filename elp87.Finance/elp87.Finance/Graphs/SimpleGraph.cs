@@ -191,7 +191,7 @@ namespace elp87.Finance.Graphs
             equityLine.StrokeThickness = graph.Property.StrokeThickness;
             equityLine.Opacity = graph.Property.Opacity;
 
-            if (graph.Property.Fill != null)
+            if ((graph.Property.Fill != null) && graph.Property.HasToolTip)
             {
                 equityLine.MouseEnter += equityLine_MouseEnter;
             }

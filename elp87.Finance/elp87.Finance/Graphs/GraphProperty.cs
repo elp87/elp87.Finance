@@ -10,6 +10,7 @@ namespace elp87.Finance.Graphs
             this.Fill = null;
             this.Opacity = 1;
             this.StrokeThickness = 1;
+            this.HasToolTip = false;
         }
 
         /// <summary>
@@ -31,5 +32,10 @@ namespace elp87.Finance.Graphs
         /// Возвращает или задает толщину линии графика
         /// </summary>
         public double StrokeThickness { get; set; }
+
+        /// <summary>
+        /// Возвращает или задает наличие объекта подсказки, отображаемого для этого графика
+        /// </summary>
+        public bool HasToolTip { get; set; }
     }
 }
