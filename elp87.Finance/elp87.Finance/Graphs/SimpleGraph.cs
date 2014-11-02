@@ -195,6 +195,10 @@ namespace elp87.Finance.Graphs
             {
                 equityLine.MouseEnter += equityLine_MouseEnter;
             }
+            if (graph.Property.MedianLineStroke != null)
+            {
+                this.DrawMedianLine(graph, profitRange, maxValue);
+            }
 
             equityLine.Points = new PointCollection();
 
@@ -232,6 +236,29 @@ namespace elp87.Finance.Graphs
             txtLabel.HorizontalAlignment = HorizontalAlignment.Left;
             txtLabel.Foreground = Brushes.White;
             txtLabel.Background = graph.Property.Fill != null ? graph.Property.Fill : graph.Property.Stroke;
+            txtLabel.Height = 23;
+            this._grid.Children.Add(txtLabel);
+        }
+
+        private void DrawMedianLine(GraphData graph, Money profitRange, Money maxValue)
+        {
+            Money min = Math.Min(graph.Points.Min(point => point.Value).Value, 0);
+            Money max = Math.Max(graph.Points.Max(point => point.Value).Value, 0);
+            Line medianLine = new Line();
+            medianLine.Stroke = graph.Property.MedianLineStroke;
+            medianLine.X1 = 0;
+            medianLine.Y1 = ((maxValue - min) / profitRange) * this._grid.ActualHeight;
+            medianLine.X2 = _actualGridWidth;
+            medianLine.Y2 = ((maxValue - max) / profitRange) * this._grid.ActualHeight;
+            this._grid.Children.Add(medianLine);
+            
+            Label txtLabel = new Label();
+            txtLabel.Content = max.ToString();
+            txtLabel.Margin = new Thickness(this._actualGridWidth, 0, 0, 0);
+            txtLabel.VerticalAlignment = VerticalAlignment.Top;
+            txtLabel.HorizontalAlignment = HorizontalAlignment.Left;
+            txtLabel.Foreground = Brushes.White;
+            txtLabel.Background = Brushes.Black;
             txtLabel.Height = 23;
             this._grid.Children.Add(txtLabel);
         }        

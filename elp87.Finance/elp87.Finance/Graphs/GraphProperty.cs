@@ -11,6 +11,7 @@ namespace elp87.Finance.Graphs
             this.Opacity = 1;
             this.StrokeThickness = 1;
             this.HasToolTip = false;
+            this.MedianLineStroke = null;
         }
 
         /// <summary>
@@ -37,5 +38,13 @@ namespace elp87.Finance.Graphs
         /// Возвращает или задает наличие объекта подсказки, отображаемого для этого графика
         /// </summary>
         public bool HasToolTip { get; set; }
+
+        /// <summary>
+        /// Возвращает или задает объект <see cref="System.Windows.Media.Brush"/>, определяющий способ рисования линии медианы        
+        /// </summary>
+        /// <remarks>
+        /// Если свойство равно null, линия медианы не строится
+        /// </remarks>
+        public Brush MedianLineStroke { get; set; }
     }
 }
