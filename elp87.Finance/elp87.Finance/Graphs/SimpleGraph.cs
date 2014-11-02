@@ -221,6 +221,19 @@ namespace elp87.Finance.Graphs
             }
 
             this._grid.Children.Add(equityLine);
+
+            Label txtLabel = new Label();
+            Money lastValue = graph.Points.Last().Value;
+            txtLabel.Content = lastValue.ToString();
+            double topOffset = (lastValue > 0) ? 0 : 23;
+            double topThickness = (((maxValue - lastValue) / profitRange) * this._grid.ActualHeight) - topOffset;              
+            txtLabel.Margin = new Thickness(gridWidth, topThickness, 0, 0);
+            txtLabel.VerticalAlignment = VerticalAlignment.Top;
+            txtLabel.HorizontalAlignment = HorizontalAlignment.Left;
+            txtLabel.Foreground = Brushes.White;
+            txtLabel.Background = graph.Property.Fill != null ? graph.Property.Fill : graph.Property.Stroke;
+            txtLabel.Height = 23;
+            this._grid.Children.Add(txtLabel);
         }        
         #endregion
 
