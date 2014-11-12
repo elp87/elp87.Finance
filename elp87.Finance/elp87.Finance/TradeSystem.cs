@@ -11,13 +11,13 @@ namespace elp87.Finance
         public TradeSystem()
         {
             this._tradeList = new List<ISysTrade>();
-            this.Properties = new TradeSystemProperties(this);
+            
         }
 
         public TradeSystem(List<ISysTrade> trades)
         {
             this._tradeList = trades;
-            this.Properties = new TradeSystemProperties(this);
+            
             this.CalcTradeProperties();
         }
         #endregion
@@ -48,7 +48,7 @@ namespace elp87.Finance
             get { return (this.Ticker + " - " + this.Name); }
         }
 
-        public TradeSystemProperties Properties { get; set; }
+        
         #endregion
 
         #region Methods

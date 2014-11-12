@@ -10,6 +10,8 @@ namespace Test.elp87.Finance
     {
         private TradeSystem sys1;
         private TradeSystem oneTradeSystem;
+        private TradeSystemProperties sys1Prop;
+        private TradeSystemProperties otsProp;
 
         public TradeSystemPropertiesTest()
         {
@@ -124,9 +126,11 @@ namespace Test.elp87.Finance
                 ExitPrice = 134850
             };
             sys1.AddTrade(trade9);
+            sys1Prop = new TradeSystemProperties(sys1);
 
             oneTradeSystem = new TradeSystem();
             oneTradeSystem.AddTrade(trade0);
+            otsProp = new TradeSystemProperties(oneTradeSystem);
         }
 
         [TestMethod]
@@ -136,9 +140,9 @@ namespace Test.elp87.Finance
             string expCumProfitLong = ((double)3060).ToStringInt();
             string expCumProfitShort = ((double)1390).ToStringInt();
 
-            Assert.AreEqual(expCumProfitAll, sys1.Properties.CumProfitAll);
-            Assert.AreEqual(expCumProfitLong, sys1.Properties.CumProfitLong);
-            Assert.AreEqual(expCumProfitShort, sys1.Properties.CumProfitShort);
+            Assert.AreEqual(expCumProfitAll, sys1Prop.CumProfitAll);
+            Assert.AreEqual(expCumProfitLong, sys1Prop.CumProfitLong);
+            Assert.AreEqual(expCumProfitShort, sys1Prop.CumProfitShort);
         }
 
         [TestMethod]
@@ -148,9 +152,9 @@ namespace Test.elp87.Finance
             string expLong = ((double)2.25).ToStringShortFloat() + "%";
             string expShort = ((double)1.08).ToStringShortFloat() + "%";
 
-            Assert.AreEqual(expAll, sys1.Properties.CumProfitPCAll);
-            Assert.AreEqual(expLong, sys1.Properties.CumProfitPCLong);
-            Assert.AreEqual(expShort, sys1.Properties.CumProfitPCShort);
+            Assert.AreEqual(expAll, sys1Prop.CumProfitPCAll);
+            Assert.AreEqual(expLong, sys1Prop.CumProfitPCLong);
+            Assert.AreEqual(expShort, sys1Prop.CumProfitPCShort);
         }
 
         [TestMethod]
@@ -160,9 +164,9 @@ namespace Test.elp87.Finance
             string expLong = ((double)116.88).ToStringShortFloat() + "%";
             string expShort = ((double)56.23).ToStringShortFloat() + "%";
 
-            Assert.AreEqual(expAll, sys1.Properties.YearProfitAll);
-            Assert.AreEqual(expLong, sys1.Properties.YearProfitLong);
-            Assert.AreEqual(expShort, sys1.Properties.YearProfitShort);
+            Assert.AreEqual(expAll, sys1Prop.YearProfitAll);
+            Assert.AreEqual(expLong, sys1Prop.YearProfitLong);
+            Assert.AreEqual(expShort, sys1Prop.YearProfitShort);
         }
 
         [TestMethod]
@@ -172,9 +176,9 @@ namespace Test.elp87.Finance
             string expLong = ((double)9.61).ToStringShortFloat() + "%";
             string expShort = ((double)4.62).ToStringShortFloat() + "%";
 
-            Assert.AreEqual(expAll, sys1.Properties.MonthProfitAll);
-            Assert.AreEqual(expLong, sys1.Properties.MonthProfitLong);
-            Assert.AreEqual(expShort, sys1.Properties.MonthProfitShort);
+            Assert.AreEqual(expAll, sys1Prop.MonthProfitAll);
+            Assert.AreEqual(expLong, sys1Prop.MonthProfitLong);
+            Assert.AreEqual(expShort, sys1Prop.MonthProfitShort);
         }
 
         [TestMethod]
@@ -184,9 +188,9 @@ namespace Test.elp87.Finance
             string expLong = "6";
             string expShort = "4";
 
-            Assert.AreEqual(expAll, sys1.Properties.TradeCountAll);
-            Assert.AreEqual(expLong, sys1.Properties.TradeCountLong);
-            Assert.AreEqual(expShort, sys1.Properties.TradeCountShort);
+            Assert.AreEqual(expAll, sys1Prop.TradeCountAll);
+            Assert.AreEqual(expLong, sys1Prop.TradeCountLong);
+            Assert.AreEqual(expShort, sys1Prop.TradeCountShort);
         }
 
         [TestMethod]
@@ -196,9 +200,9 @@ namespace Test.elp87.Finance
             string expLong = ((double)510).ToStringFloat();
             string expShort = ((double)347.5).ToStringFloat();
 
-            Assert.AreEqual(expAll, sys1.Properties.TradeProfitAverageAll);
-            Assert.AreEqual(expLong, sys1.Properties.TradeProfitAverageLong);
-            Assert.AreEqual(expShort, sys1.Properties.TradeProfitAverageShort);
+            Assert.AreEqual(expAll, sys1Prop.TradeProfitAverageAll);
+            Assert.AreEqual(expLong, sys1Prop.TradeProfitAverageLong);
+            Assert.AreEqual(expShort, sys1Prop.TradeProfitAverageShort);
         }
 
         [TestMethod]
@@ -208,9 +212,9 @@ namespace Test.elp87.Finance
             string expLong = ((double)0.37).ToStringShortFloat() + "%";
             string expShort = ((double)0.27).ToStringShortFloat() + "%";
 
-            Assert.AreEqual(expAll, sys1.Properties.TradeProfitPCAverageAll);
-            Assert.AreEqual(expLong, sys1.Properties.TradeProfitPCAverageLong);
-            Assert.AreEqual(expShort, sys1.Properties.TradeProfitPCAverageShort);
+            Assert.AreEqual(expAll, sys1Prop.TradeProfitPCAverageAll);
+            Assert.AreEqual(expLong, sys1Prop.TradeProfitPCAverageLong);
+            Assert.AreEqual(expShort, sys1Prop.TradeProfitPCAverageShort);
         }
 
         [TestMethod]
@@ -220,9 +224,9 @@ namespace Test.elp87.Finance
             string expLong = (4).ToString();
             string expShort = (2).ToString();
 
-            Assert.AreEqual(expAll, sys1.Properties.WinTradeCountAll);
-            Assert.AreEqual(expLong, sys1.Properties.WinTradeCountLong);
-            Assert.AreEqual(expShort, sys1.Properties.WinTradeCountShort);
+            Assert.AreEqual(expAll, sys1Prop.WinTradeCountAll);
+            Assert.AreEqual(expLong, sys1Prop.WinTradeCountLong);
+            Assert.AreEqual(expShort, sys1Prop.WinTradeCountShort);
         }
 
         [TestMethod]
@@ -232,9 +236,9 @@ namespace Test.elp87.Finance
             string expLong = ((double)66.67).ToStringShortFloat() + "%";
             string expShort = ((double)50).ToStringShortFloat() + "%";
 
-            Assert.AreEqual(expAll, sys1.Properties.WinTradeCountPCAll);
-            Assert.AreEqual(expLong, sys1.Properties.WinTradeCountPCLong);
-            Assert.AreEqual(expShort, sys1.Properties.WinTradeCountPCShort);
+            Assert.AreEqual(expAll, sys1Prop.WinTradeCountPCAll);
+            Assert.AreEqual(expLong, sys1Prop.WinTradeCountPCLong);
+            Assert.AreEqual(expShort, sys1Prop.WinTradeCountPCShort);
         }
 
         [TestMethod]
@@ -244,9 +248,9 @@ namespace Test.elp87.Finance
             string expLong = ((double)4270).ToStringBase();
             string expShort = ((double)2180).ToStringBase();
 
-            Assert.AreEqual(expAll, sys1.Properties.WinProfitSumAll);
-            Assert.AreEqual(expLong, sys1.Properties.WinProfitSumLong);
-            Assert.AreEqual(expShort, sys1.Properties.WinProfitSumShort);
+            Assert.AreEqual(expAll, sys1Prop.WinProfitSumAll);
+            Assert.AreEqual(expLong, sys1Prop.WinProfitSumLong);
+            Assert.AreEqual(expShort, sys1Prop.WinProfitSumShort);
         }
 
         [TestMethod]
@@ -256,9 +260,9 @@ namespace Test.elp87.Finance
             string expLong = ((double)1067.5).ToStringBase();
             string expShort = ((double)1090).ToStringBase();
 
-            Assert.AreEqual(expAll, sys1.Properties.WinProfitAverageAll);
-            Assert.AreEqual(expLong, sys1.Properties.WinProfitAverageLong);
-            Assert.AreEqual(expShort, sys1.Properties.WinProfitAverageShort);
+            Assert.AreEqual(expAll, sys1Prop.WinProfitAverageAll);
+            Assert.AreEqual(expLong, sys1Prop.WinProfitAverageLong);
+            Assert.AreEqual(expShort, sys1Prop.WinProfitAverageShort);
         }
 
         [TestMethod]
@@ -268,9 +272,9 @@ namespace Test.elp87.Finance
             string expLong = ((double)0.8).ToStringShortFloat() + "%";
             string expShort = ((double)0.85).ToStringShortFloat() + "%";
 
-            Assert.AreEqual(expAll, sys1.Properties.WinProfitPCAverageAll);
-            Assert.AreEqual(expLong, sys1.Properties.WinProfitPCAverageLong);
-            Assert.AreEqual(expShort, sys1.Properties.WinProfitPCAverageShort);
+            Assert.AreEqual(expAll, sys1Prop.WinProfitPCAverageAll);
+            Assert.AreEqual(expLong, sys1Prop.WinProfitPCAverageLong);
+            Assert.AreEqual(expShort, sys1Prop.WinProfitPCAverageShort);
         }
 
         [TestMethod]
@@ -280,9 +284,9 @@ namespace Test.elp87.Finance
             string expLong = (2).ToString();
             string expShort = (1).ToString();
 
-            Assert.AreEqual(expAll, sys1.Properties.MaxWinRowAll);
-            Assert.AreEqual(expLong, sys1.Properties.MaxWinRowLong);
-            Assert.AreEqual(expShort, sys1.Properties.MaxWinRowShort);
+            Assert.AreEqual(expAll, sys1Prop.MaxWinRowAll);
+            Assert.AreEqual(expLong, sys1Prop.MaxWinRowLong);
+            Assert.AreEqual(expShort, sys1Prop.MaxWinRowShort);
         }
 
         [TestMethod]
@@ -292,9 +296,9 @@ namespace Test.elp87.Finance
             string expLong = (2).ToString();
             string expShort = (2).ToString();
 
-            Assert.AreEqual(expAll, sys1.Properties.LoseTradeCountAll);
-            Assert.AreEqual(expLong, sys1.Properties.LoseTradeCountLong);
-            Assert.AreEqual(expShort, sys1.Properties.LoseTradeCountShort);
+            Assert.AreEqual(expAll, sys1Prop.LoseTradeCountAll);
+            Assert.AreEqual(expLong, sys1Prop.LoseTradeCountLong);
+            Assert.AreEqual(expShort, sys1Prop.LoseTradeCountShort);
         }
 
         [TestMethod]
@@ -304,9 +308,9 @@ namespace Test.elp87.Finance
             string expLong = ((double)33.33).ToStringShortFloat() + "%";
             string expShort = ((double)50).ToStringShortFloat() + "%";
 
-            Assert.AreEqual(expAll, sys1.Properties.LoseTradeCountPCAll);
-            Assert.AreEqual(expLong, sys1.Properties.LoseTradeCountPCLong);
-            Assert.AreEqual(expShort, sys1.Properties.LoseTradeCountPCShort);
+            Assert.AreEqual(expAll, sys1Prop.LoseTradeCountPCAll);
+            Assert.AreEqual(expLong, sys1Prop.LoseTradeCountPCLong);
+            Assert.AreEqual(expShort, sys1Prop.LoseTradeCountPCShort);
         }
 
         [TestMethod]
@@ -316,9 +320,9 @@ namespace Test.elp87.Finance
             string expLong = ((double)-1210).ToStringBase();
             string expShort = ((double)-790).ToStringBase();
 
-            Assert.AreEqual(expAll, sys1.Properties.LoseProfitSumAll);
-            Assert.AreEqual(expLong, sys1.Properties.LoseProfitSumLong);
-            Assert.AreEqual(expShort, sys1.Properties.LoseProfitSumShort);
+            Assert.AreEqual(expAll, sys1Prop.LoseProfitSumAll);
+            Assert.AreEqual(expLong, sys1Prop.LoseProfitSumLong);
+            Assert.AreEqual(expShort, sys1Prop.LoseProfitSumShort);
         }
 
         [TestMethod]
@@ -328,9 +332,9 @@ namespace Test.elp87.Finance
             string expLong = ((double)-605).ToStringBase();
             string expShort = ((double)-395).ToStringBase();
 
-            Assert.AreEqual(expAll, sys1.Properties.LoseProfitAverageAll);
-            Assert.AreEqual(expLong, sys1.Properties.LoseProfitAverageLong);
-            Assert.AreEqual(expShort, sys1.Properties.LoseProfitAverageShort);
+            Assert.AreEqual(expAll, sys1Prop.LoseProfitAverageAll);
+            Assert.AreEqual(expLong, sys1Prop.LoseProfitAverageLong);
+            Assert.AreEqual(expShort, sys1Prop.LoseProfitAverageShort);
         }
 
         [TestMethod]
@@ -340,9 +344,9 @@ namespace Test.elp87.Finance
             string expLong = ((double)-0.47).ToStringShortFloat() + "%";
             string expShort = ((double)-0.3).ToStringShortFloat() + "%";
 
-            Assert.AreEqual(expAll, sys1.Properties.LoseProfitPCAverageAll);
-            Assert.AreEqual(expLong, sys1.Properties.LoseProfitPCAverageLong);
-            Assert.AreEqual(expShort, sys1.Properties.LoseProfitPCAverageShort);
+            Assert.AreEqual(expAll, sys1Prop.LoseProfitPCAverageAll);
+            Assert.AreEqual(expLong, sys1Prop.LoseProfitPCAverageLong);
+            Assert.AreEqual(expShort, sys1Prop.LoseProfitPCAverageShort);
         }
 
         [TestMethod]
@@ -352,9 +356,9 @@ namespace Test.elp87.Finance
             string expLong = (1).ToString();
             string expShort = (1).ToString();
 
-            Assert.AreEqual(expAll, sys1.Properties.MaxLoseRowAll);
-            Assert.AreEqual(expLong, sys1.Properties.MaxLoseRowLong);
-            Assert.AreEqual(expShort, sys1.Properties.MaxLoseRowShort);
+            Assert.AreEqual(expAll, sys1Prop.MaxLoseRowAll);
+            Assert.AreEqual(expLong, sys1Prop.MaxLoseRowLong);
+            Assert.AreEqual(expShort, sys1Prop.MaxLoseRowShort);
         }
 
         [TestMethod]
@@ -364,9 +368,9 @@ namespace Test.elp87.Finance
             string expLong = ((double)-1090).ToStringBase();
             string expShort = ((double)-490).ToStringBase();
 
-            Assert.AreEqual(expAll, sys1.Properties.MaxDrawDownAll);
-            Assert.AreEqual(expLong, sys1.Properties.MaxDrawDownLong);
-            Assert.AreEqual(expShort, sys1.Properties.MaxDrawDownShort);
+            Assert.AreEqual(expAll, sys1Prop.MaxDrawDownAll);
+            Assert.AreEqual(expLong, sys1Prop.MaxDrawDownLong);
+            Assert.AreEqual(expShort, sys1Prop.MaxDrawDownShort);
         }
 
         [TestMethod]
@@ -376,9 +380,9 @@ namespace Test.elp87.Finance
             string expLong = new DateTime(2013, 4, 23, 10, 0, 0).ToStandardString();
             string expShort = new DateTime(2013, 4, 18, 11, 30, 0).ToStandardString();
 
-            Assert.AreEqual(expAll, sys1.Properties.MaxDrawDownDateAll);
-            Assert.AreEqual(expLong, sys1.Properties.MaxDrawDownDateLong);
-            Assert.AreEqual(expShort, sys1.Properties.MaxDrawDownDateShort);
+            Assert.AreEqual(expAll, sys1Prop.MaxDrawDownDateAll);
+            Assert.AreEqual(expLong, sys1Prop.MaxDrawDownDateLong);
+            Assert.AreEqual(expShort, sys1Prop.MaxDrawDownDateShort);
         }
 
         [TestMethod]
@@ -388,9 +392,9 @@ namespace Test.elp87.Finance
             string expLong = ((double)-0.85).ToStringShortFloat() + "%";
             string expShort = ((double)-0.38).ToStringShortFloat() + "%";
 
-            Assert.AreEqual(expAll, sys1.Properties.MaxDrawDownPCAll);
-            Assert.AreEqual(expLong, sys1.Properties.MaxDrawDownPCLong);
-            Assert.AreEqual(expShort, sys1.Properties.MaxDrawDownPCShort);
+            Assert.AreEqual(expAll, sys1Prop.MaxDrawDownPCAll);
+            Assert.AreEqual(expLong, sys1Prop.MaxDrawDownPCLong);
+            Assert.AreEqual(expShort, sys1Prop.MaxDrawDownPCShort);
         }
 
         [TestMethod]
@@ -400,9 +404,9 @@ namespace Test.elp87.Finance
             string expLong = new DateTime(2013, 4, 23, 10, 0, 0).ToStandardString();
             string expShort = new DateTime(2013, 4, 18, 11, 30, 0).ToStandardString();
 
-            Assert.AreEqual(expAll, sys1.Properties.MaxDrawDownPCDateAll);
-            Assert.AreEqual(expLong, sys1.Properties.MaxDrawDownPCDateLong);
-            Assert.AreEqual(expShort, sys1.Properties.MaxDrawDownPCDateShort);
+            Assert.AreEqual(expAll, sys1Prop.MaxDrawDownPCDateAll);
+            Assert.AreEqual(expLong, sys1Prop.MaxDrawDownPCDateLong);
+            Assert.AreEqual(expShort, sys1Prop.MaxDrawDownPCDateShort);
         }
 
         [TestMethod]
@@ -412,9 +416,9 @@ namespace Test.elp87.Finance
             string expLong = ((double)3.53).ToStringShortFloat();
             string expShort = ((double)2.76).ToStringShortFloat();
 
-            Assert.AreEqual(expAll, sys1.Properties.ProfitFactorAll);
-            Assert.AreEqual(expLong, sys1.Properties.ProfitFactorLong);
-            Assert.AreEqual(expShort, sys1.Properties.ProfitFactorShort);
+            Assert.AreEqual(expAll, sys1Prop.ProfitFactorAll);
+            Assert.AreEqual(expLong, sys1Prop.ProfitFactorLong);
+            Assert.AreEqual(expShort, sys1Prop.ProfitFactorShort);
         }
 
         [TestMethod]
@@ -424,9 +428,9 @@ namespace Test.elp87.Finance
             string expLong = ((double)2.81).ToStringShortFloat();
             string expShort = ((double)2.84).ToStringShortFloat();
 
-            Assert.AreEqual(expAll, sys1.Properties.RecoveryFactorAll);
-            Assert.AreEqual(expLong, sys1.Properties.RecoveryFactorLong);
-            Assert.AreEqual(expShort, sys1.Properties.RecoveryFactorShort);
+            Assert.AreEqual(expAll, sys1Prop.RecoveryFactorAll);
+            Assert.AreEqual(expLong, sys1Prop.RecoveryFactorLong);
+            Assert.AreEqual(expShort, sys1Prop.RecoveryFactorShort);
         }
 
         [TestMethod]
@@ -436,15 +440,9 @@ namespace Test.elp87.Finance
             string expLong = ((double)1.76).ToStringShortFloat();
             string expShort = ((double)2.76).ToStringShortFloat();
 
-            Assert.AreEqual(expAll, sys1.Properties.PayoffRatioAll);
-            Assert.AreEqual(expLong, sys1.Properties.PayoffRatioLong);
-            Assert.AreEqual(expShort, sys1.Properties.PayoffRatioShort);
-        }
-
-        [TestMethod]
-        public void TestPropertiesOneTradeSystem()
-        {
-            oneTradeSystem.CalcTradeProperties();
-        }
+            Assert.AreEqual(expAll, sys1Prop.PayoffRatioAll);
+            Assert.AreEqual(expLong, sys1Prop.PayoffRatioLong);
+            Assert.AreEqual(expShort, sys1Prop.PayoffRatioShort);
+        }        
     }
 }
