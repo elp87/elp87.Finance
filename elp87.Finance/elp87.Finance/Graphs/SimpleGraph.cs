@@ -16,13 +16,17 @@ namespace elp87.Finance.Graphs
         #endregion
 
         #region Fields
-        private GraphData[] _graphs;
-        private Grid _grid;
+        protected GraphData[] _graphs;
+        protected Grid _grid;
         private double _actualGridWidth;
         #endregion
 
         #region Constructors
+        protected SimpleGraph()
+        { }
+
         protected SimpleGraph(Grid grid)
+            :this()
         {
             this._grid = grid;
             this._grid.SizeChanged += new SizeChangedEventHandler(grid_SizeChanged);

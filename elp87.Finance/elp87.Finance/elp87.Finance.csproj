@@ -51,13 +51,12 @@
     <Compile Include="Filter\FilterDay.cs" />
     <Compile Include="Filter\FilterResult.cs" />
     <Compile Include="Filter\FilterSet.cs" />
-    <Compile Include="Graphs\EquityGraph.cs" />
     <Compile Include="Graphs\GraphData.cs" />
     <Compile Include="Graphs\GraphProperty.cs" />
     <Compile Include="Graphs\IGraph.cs" />
     <Compile Include="Graphs\PointData.cs" />
     <Compile Include="Graphs\SimpleGraph.cs" />
-    <Compile Include="Graphs\SystemEquityGraph.cs" />
+    <Compile Include="Graphs\TradeSystemEquityGraph.cs" />
     <Compile Include="Helpers\Compare.cs" />
     <Compile Include="Helpers\Convert.cs" />
     <Compile Include="Helpers\LinqExts.cs" />
