@@ -16,8 +16,8 @@ namespace elp87.Finance.Graphs
         #endregion
 
         #region Fields
-        protected GraphData[] _graphs;
-        protected Grid _grid;
+        private GraphData[] _graphs;
+        private Grid _grid;
         private double _actualGridWidth;
         #endregion
 
@@ -76,27 +76,27 @@ namespace elp87.Finance.Graphs
         #endregion
 
         #region Private
-        protected DateTime GetMinDate()
+        private DateTime GetMinDate()
         {
             return this._graphs.Min(graph => graph.Points.Min(point => point.Date));
         }
 
-        protected DateTime GetMaxDate()
+        private DateTime GetMaxDate()
         {
             return this._graphs.Max(graph => graph.Points.Max(point => point.Date));
         }
 
-        protected Money GetMinValue()
+        private Money GetMinValue()
         {
             return this._graphs.Min(graph => graph.Points.Min(point => point.Value));
         }
 
-        protected Money GetMaxValue()
+        private Money GetMaxValue()
         {
             return this._graphs.Max(graph => graph.Points.Max(point => point.Value));
         }
 
-        protected double GetHorizontalCell(Money range)
+        private double GetHorizontalCell(Money range)
         {
             double cell = 0.01;
             if (range > 0.1) cell = 0.05;

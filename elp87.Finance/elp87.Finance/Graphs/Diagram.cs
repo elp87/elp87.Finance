@@ -5,6 +5,7 @@ namespace elp87.Finance.Graphs
     public abstract class Diagram : IGraph
     {
         #region Fields
+        
         protected List<DiagramCategoryData> _categories;
         protected DiagramType _diagramType;
         #endregion
@@ -14,6 +15,8 @@ namespace elp87.Finance.Graphs
         {
             
         }
+
+
         #endregion
 
         #region Enums
