@@ -16,8 +16,8 @@ namespace elp87.Finance.Graphs
         #endregion
 
         #region Fields
-        private GraphData[] _graphs;
         private Grid _grid;
+        protected GraphData[] _graphs;
         private double _actualGridWidth;
         #endregion
 
