@@ -17,11 +17,17 @@ namespace elp87.Finance.Graphs
         #endregion
 
         #region Enums
-        public enum DiagramType
+        protected enum DiagramType
         {
             HorizontalBlocs,
             VerticalBlocs
-        } 
+        }
+
+        protected enum FillingTypes
+        {
+            MinToMaxGradient,
+            AroundAxisFilling
+        }
         #endregion
     }
 }
