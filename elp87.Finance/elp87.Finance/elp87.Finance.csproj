@@ -51,6 +51,7 @@
     <Compile Include="Filter\FilterDay.cs" />
     <Compile Include="Filter\FilterResult.cs" />
     <Compile Include="Filter\FilterSet.cs" />
+    <Compile Include="Graphs\AxisNullValueException.cs" />
     <Compile Include="Graphs\Diagram.cs" />
     <Compile Include="Graphs\DiagramCategoryData.cs" />
     <Compile Include="Graphs\GraphData.cs" />

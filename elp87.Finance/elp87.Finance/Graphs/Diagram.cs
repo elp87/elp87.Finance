@@ -132,6 +132,27 @@ namespace elp87.Finance.Graphs
                         block.Stroke = blockBrush;
                         break;
                     }
+                case FillingTypes.AroundAxisFilling:
+                    {
+                        SolidColorBrush blockBrush;
+                        if (this._catAxis == null) throw new AxisNullValueException();
+                        double axisValue = this._catAxis.Value;
+                        try
+                        {
+                            double categoryValue = Convert.ToDouble(diagramCategoryData.Title);
+                            if (categoryValue < axisValue) { blockBrush = Brushes.Red; }
+                            else if (categoryValue == axisValue) { blockBrush = Brushes.Black; }
+                            else { blockBrush = Brushes.Green; }
+                            
+                        }
+                        catch (Exception)
+                        {
+                            blockBrush = Brushes.Black;
+                        }
+                        block.Fill = blockBrush;
+                        block.Stroke = blockBrush;
+                        break;
+                    }
             }
             this._grid.Children.Add(block);
         }
