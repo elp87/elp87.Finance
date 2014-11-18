@@ -58,6 +58,7 @@
     <Compile Include="Graphs\GraphProperty.cs" />
     <Compile Include="Graphs\IGraph.cs" />
     <Compile Include="Graphs\PointData.cs" />
+    <Compile Include="Graphs\ProfitDistributionDiagram.cs" />
     <Compile Include="Graphs\SimpleGraph.cs" />
     <Compile Include="Graphs\TradeSystemEquityGraph.cs" />
     <Compile Include="Helpers\Compare.cs" />

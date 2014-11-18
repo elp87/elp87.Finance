@@ -8,7 +8,7 @@ using System.Windows.Shapes;
 
 namespace elp87.Finance.Graphs
 {
-    public class Diagram : IGraph
+    public abstract class Diagram : IGraph
     {
         #region Fields
         private Grid _grid;
@@ -17,25 +17,12 @@ namespace elp87.Finance.Graphs
         protected DiagramTypes _diagramType;
         protected FillingTypes _fillingType;
         protected Nullable<double> _catAxis;
-        #endregion
+        #endregion        
 
-        public Diagram()
-        {
-            this._diagramType = DiagramTypes.VerticalBlocks;
-            this._fillingType = FillingTypes.MinToMaxGradient;
-        }
-
-        public Diagram(Grid grid)
-            : this()
+        protected Diagram(Grid grid)            
         {
             this._grid = grid;
-        }
-
-        public Diagram(Grid grid, List<DiagramCategoryData> categories)
-            : this(grid)
-        {
-            this._categories = categories;
-        }
+        }        
 
         #region Methods
         public void DrawGraph()
