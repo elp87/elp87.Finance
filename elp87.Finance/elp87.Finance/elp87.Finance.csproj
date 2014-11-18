@@ -60,6 +60,7 @@
     <Compile Include="Graphs\PointData.cs" />
     <Compile Include="Graphs\ProfitDistributionDiagram.cs" />
     <Compile Include="Graphs\SimpleGraph.cs" />
+    <Compile Include="Graphs\TradesProfitDistributionDiagram.cs" />
     <Compile Include="Graphs\TradeSystemEquityGraph.cs" />
     <Compile Include="Helpers\Compare.cs" />
     <Compile Include="Helpers\Convert.cs" />
