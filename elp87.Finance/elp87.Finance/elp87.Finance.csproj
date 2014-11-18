@@ -60,6 +60,7 @@
     <Compile Include="Graphs\PointData.cs" />
     <Compile Include="Graphs\ProfitDistributionDiagram.cs" />
     <Compile Include="Graphs\SimpleGraph.cs" />
+    <Compile Include="Graphs\TradeDaysProfitDistributionDiagram.cs" />
     <Compile Include="Graphs\TradesProfitDistributionDiagram.cs" />
     <Compile Include="Graphs\TradeSystemEquityGraph.cs" />
     <Compile Include="Helpers\Compare.cs" />
@@ -94,7 +95,9 @@
   <ItemGroup>
     <Content Include="libs\elp87.Helpers.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
