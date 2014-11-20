@@ -19,12 +19,16 @@ namespace elp87.Finance.Graphs
         protected Nullable<double> _catAxis;
         #endregion        
 
-        protected Diagram(Grid grid)            
+        #region Constructors
+        protected Diagram(Grid grid)
         {
             this._grid = grid;
-        }        
+            this._grid.SizeChanged += grid_SizeChanged;
+        } 
+        #endregion
 
         #region Methods
+        #region Public
         public void DrawGraph()
         {
             this._grid.Children.Clear();
@@ -41,7 +45,8 @@ namespace elp87.Finance.Graphs
                     this.DrawBlock(this._categories[i], i, maxValue, valueRange);
                 }
             }
-        }
+        } 
+        #endregion
 
         #region Private
         private double GetMaxValue()
@@ -160,6 +165,13 @@ namespace elp87.Finance.Graphs
 
             return rect;
         }
+        #endregion
+
+        #region Event Handlers
+        private void grid_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
+        {
+            this.DrawGraph();
+        }  
         #endregion
         #endregion
 
