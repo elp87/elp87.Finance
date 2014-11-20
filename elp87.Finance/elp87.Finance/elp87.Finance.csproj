@@ -12,6 +12,11 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <UpdateAssemblyVersion>True</UpdateAssemblyVersion>
+    <UpdateAssemblyFileVersion>True</UpdateAssemblyFileVersion>
+    <UpdateAssemblyInfoVersion>False</UpdateAssemblyInfoVersion>
+    <AssemblyVersionSettings>None.None.None.Increment</AssemblyVersionSettings>
+    <AssemblyFileVersionSettings>None.None.None.Increment</AssemblyFileVersionSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -65,6 +70,7 @@
     <Compile Include="Graphs\TradeDaysProfitDistributionDiagram.cs" />
     <Compile Include="Graphs\TradesProfitDistributionDiagram.cs" />
     <Compile Include="Graphs\TradeSystemEquityGraph.cs" />
+    <Compile Include="Graphs\TradeSystemMonthEquityDiagram.cs" />
     <Compile Include="Helpers\Compare.cs" />
     <Compile Include="Helpers\Convert.cs" />
     <Compile Include="Helpers\LinqExts.cs" />
@@ -97,7 +103,14 @@
   <ItemGroup>
     <Content Include="libs\elp87.Helpers.dll" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

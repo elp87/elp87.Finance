@@ -12,5 +12,11 @@ namespace elp87.Finance.Graphs
             this._catAxis = 0;
         }
 
+        protected override string GetBlockTooltipContent(DiagramCategoryData category)
+        {
+            string titleNotation = category.Title.ToString() + "%";
+            string valueNotation = category.Value.ToString();
+            return titleNotation + " - " + valueNotation;
+        }
     }
 }
