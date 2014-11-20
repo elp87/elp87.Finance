@@ -90,6 +90,7 @@ namespace elp87.Finance.Graphs
         private void DrawBlock(DiagramCategoryData diagramCategoryData, int i, double maxValue, double valueRange)
         {
             Rectangle block = new Rectangle();
+            
             switch (this._diagramType)
             {
                 case DiagramTypes.VerticalBlocks:
@@ -146,7 +147,14 @@ namespace elp87.Finance.Graphs
                         break;
                     }
             }
+            block.Tag = diagramCategoryData;
+            block.MouseEnter += block_MouseEnter;
             this._grid.Children.Add(block);
+        }
+
+        protected virtual string GetBlockTooltipContent(DiagramCategoryData category)
+        {
+            return category.Title.ToString() + " - " + category.Value.ToString();
         }
 
         private static Rectangle CreateRectangle(double x1, double x2, double y1, double y2)
@@ -171,7 +179,19 @@ namespace elp87.Finance.Graphs
         private void grid_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
         {
             this.DrawGraph();
-        }  
+        }
+
+        private void block_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            Rectangle block = sender as Rectangle;
+            DiagramCategoryData category = block.Tag as DiagramCategoryData;
+            if (block != null && category != null)
+            {
+                ToolTip tt = new ToolTip();
+                tt.Content = GetBlockTooltipContent(category);
+                block.ToolTip = tt;
+            }
+        }        
         #endregion
         #endregion
 
