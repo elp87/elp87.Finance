@@ -57,6 +57,7 @@
     <Compile Include="Filter\FilterResult.cs" />
     <Compile Include="Filter\FilterSet.cs" />
     <Compile Include="Graphs\AxisNullValueException.cs" />
+    <Compile Include="Graphs\DayOfWeekDistributionDiagram.cs" />
     <Compile Include="Graphs\Diagram.cs" />
     <Compile Include="Graphs\DiagramCategoryData.cs" />
     <Compile Include="Graphs\GraphData.cs" />
@@ -102,9 +103,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="libs\elp87.Helpers.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
