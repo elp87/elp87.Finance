@@ -23,11 +23,11 @@ namespace elp87.Finance.Graphs
             ttContent.Append(dayNotation + '\n');
 
             string equityNotation = "П/У - " + Math.Round(category.Value, 2).ToString();
-            ttContent.Append(equityNotation + 'n');
+            ttContent.Append(equityNotation + '\n');
 
             foreach (var attachedData in category.AttachedData)
             {
-                ttContent.Append((string)attachedData + 'n');
+                ttContent.Append((string)attachedData + '\n');
             }
             return ttContent.ToString();
         }

@@ -35,7 +35,17 @@ namespace elp87.Finance.Graphs
                 int winCount = dayTrades.Where(trade => trade.Profit > 0).Count();
                 Money loseProfit = dayTrades.Where(trade => trade.Profit <= 0).Sum(trade => trade.Profit.Value);
                 int loseCount = dayTrades.Where(trade => trade.Profit <= 0).Count();
-                double profitFactor = Math.Round(winProfit / loseProfit, 2);
+                double profitFactor;
+                try
+                {
+                    profitFactor = Math.Round(winProfit / loseProfit, 2);
+                }
+                catch (DivideByZeroException)
+                {
+                    if (winProfit > 0) profitFactor = Double.PositiveInfinity;
+                    else if (winProfit == 0) profitFactor = Double.NaN;
+                    else profitFactor = Double.NegativeInfinity;
+                }
 
                 string tradesCountNotation = "Кол-во сделок - " + dayTrades.Count().ToString();
                 string winNotation = "Прибыльных - " + winCount.ToString() + "(" + winProfit.ToString() + ")";
