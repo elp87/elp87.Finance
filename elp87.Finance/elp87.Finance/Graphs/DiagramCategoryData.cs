@@ -5,5 +5,7 @@
         public object Title { get; set; }
 
         public double Value { get; set; }
+
+        public object[] AttachedData { get; set; }
     }
 }
