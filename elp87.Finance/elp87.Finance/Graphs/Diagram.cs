@@ -76,8 +76,8 @@ namespace elp87.Finance.Graphs
                     }
                 case DiagramTypes.HorizontalBlocks:
                     {
-                        zeroLine.X1 = (maxValue / valueRange) * this._grid.ActualWidth;
-                        zeroLine.X2 = (maxValue / valueRange) * this._grid.ActualWidth;
+                        zeroLine.X1 = this._grid.ActualWidth - (maxValue / valueRange) * this._grid.ActualWidth;
+                        zeroLine.X2 = this._grid.ActualWidth - (maxValue / valueRange) * this._grid.ActualWidth;
                         zeroLine.Y1 = 0;
                         zeroLine.Y2 = this._grid.ActualHeight;
                         break;
@@ -107,8 +107,8 @@ namespace elp87.Finance.Graphs
                 case DiagramTypes.HorizontalBlocks:
                     {
                         block = CreateRectangle(
-                            (maxValue / valueRange) * this._grid.ActualWidth,
-                            ((maxValue - diagramCategoryData.Value) / valueRange) * this._grid.ActualWidth,
+                            this._grid.ActualWidth - (maxValue / valueRange) * this._grid.ActualWidth,
+                            this._grid.ActualWidth - ((maxValue - diagramCategoryData.Value) / valueRange) * this._grid.ActualWidth,
                             ((i + .25) / this._categories.Count) * this._grid.ActualHeight,
                             ((i + .75) / this._categories.Count) * this._grid.ActualHeight
                             );
