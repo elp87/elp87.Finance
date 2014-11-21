@@ -70,6 +70,7 @@
     <Compile Include="Graphs\TradeDaysMonthEquityDiagram.cs" />
     <Compile Include="Graphs\TradeDaysProfitDistributionDiagram.cs" />
     <Compile Include="Graphs\TradesProfitDistributionDiagram.cs" />
+    <Compile Include="Graphs\TradeSystemDayOfWeekDistributionDiagram.cs" />
     <Compile Include="Graphs\TradeSystemEquityGraph.cs" />
     <Compile Include="Graphs\TradeSystemMonthEquityDiagram.cs" />
     <Compile Include="Helpers\Compare.cs" />

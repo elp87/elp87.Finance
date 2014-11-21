@@ -6,8 +6,8 @@ namespace elp87.Finance.Graphs
 {
     public abstract class DayOfWeekDistributionDiagram : Diagram
     {
-        protected CalcTypes _calcType;
-
+        protected const int DaysInWeekCount = 7;
+                
         protected DayOfWeekDistributionDiagram(Grid grid)
             : base(grid)
         {
@@ -32,7 +32,7 @@ namespace elp87.Finance.Graphs
             return ttContent.ToString();
         }
         
-        protected enum CalcTypes
+        public enum CalcTypes
         {
             EntryDate,
             ExitDate
