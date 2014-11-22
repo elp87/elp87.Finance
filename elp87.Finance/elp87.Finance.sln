@@ -26,13 +26,13 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		ConfigurationFilter = 
-		AssemblyInfoFilePath = 
-		UpdateAssemblyVersion = True
-		UpdateAssemblyFileVersion = True
-		UpdateAssemblyInfoVersion = False
-		AssemblyVersionSettings = None.None.None.Increment
-		AssemblyFileVersionSettings = None.None.None.Increment
 		AssemblyInfoVersionSettings = 
+		AssemblyFileVersionSettings = 
+		AssemblyVersionSettings = 
+		UpdateAssemblyInfoVersion = False
+		UpdateAssemblyFileVersion = False
+		UpdateAssemblyVersion = False
+		AssemblyInfoFilePath = 
+		ConfigurationFilter = 
 	EndGlobalSection
 EndGlobal
