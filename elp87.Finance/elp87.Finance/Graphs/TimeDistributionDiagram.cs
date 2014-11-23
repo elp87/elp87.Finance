@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace elp87.Finance.Graphs
 {
     public abstract class TimeDistributionDiagram : EntryExitDistributionDiagram
     {
+        protected const int HoursInDay = 24;
+
         protected TimeDistributionDiagram(Grid grid)
             : base(grid)
         {

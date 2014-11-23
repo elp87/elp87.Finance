@@ -17,7 +17,7 @@ namespace elp87.Finance.Graphs
         {
             StringBuilder ttContent = new StringBuilder();
 
-            string titleNotation = (string)category.Title;
+            string titleNotation = category.Title.ToString();
             ttContent.Append(titleNotation + '\n');
 
             string equityNotation = "П/У - " + Math.Round(category.Value, 2).ToString();

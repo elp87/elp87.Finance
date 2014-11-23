@@ -49,7 +49,7 @@ namespace elp87.Finance.Graphs
 
                 string tradesCountNotation = "Кол-во сделок - " + dayTrades.Count().ToString();
                 string winNotation = "Прибыльных - " + winCount.ToString() + "(" + winProfit.ToString() + ")";
-                string loseNotation = "Прибыльных - " + loseCount.ToString() + "(" + loseProfit.ToString() + ")";
+                string loseNotation = "Убыточных - " + loseCount.ToString() + "(" + loseProfit.ToString() + ")";
                 string profitFactorNotation = "Профит-фактор - " + profitFactor.ToString();
                 this._categories.Add(new DiagramCategoryData() { 
                     Title = title, 

@@ -75,6 +75,7 @@
     <Compile Include="Graphs\TradeSystemDayOfWeekDistributionDiagram.cs" />
     <Compile Include="Graphs\TradeSystemEquityGraph.cs" />
     <Compile Include="Graphs\TradeSystemMonthEquityDiagram.cs" />
+    <Compile Include="Graphs\TradeSystemTimeDistributionDiagram.cs" />
     <Compile Include="Helpers\Compare.cs" />
     <Compile Include="Helpers\Convert.cs" />
     <Compile Include="Helpers\LinqExts.cs" />
