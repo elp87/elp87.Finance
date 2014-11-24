@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="elp87.Finance.Graphs.Diagram" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgACAAAAQAAAgIQAAAAAgAAIQgAAAAAIAABAIAg=</HashCode>
+      <FileName>Graphs\Diagram.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="elp87.Finance.Graphs.EntryExitDistributionDiagram">
+    <Position X="3.5" Y="1.75" Width="2.25" />
+    <NestedTypes>
+      <Enum Name="elp87.Finance.Graphs.EntryExitDistributionDiagram.CalcTypes" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Graphs\EntryExitDistributionDiagram.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIBAAAA=</HashCode>
+      <FileName>Graphs\EntryExitDistributionDiagram.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="elp87.Finance.Graphs.MonthEquityDiagram" Collapsed="true">
+    <Position X="8.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Graphs\MonthEquityDiagram.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="elp87.Finance.Graphs.ProfitDistributionDiagram" Collapsed="true">
+    <Position X="14.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Graphs\ProfitDistributionDiagram.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="elp87.Finance.Graphs.DayOfWeekDistributionDiagram" Collapsed="true">
+    <Position X="2.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Graphs\DayOfWeekDistributionDiagram.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="elp87.Finance.Graphs.TimeDistributionDiagram" Collapsed="true">
+    <Position X="4.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Graphs\TimeDistributionDiagram.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="elp87.Finance.Graphs.TradeDaysMonthEquityDiagram" Collapsed="true">
+    <Position X="7.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Graphs\TradeDaysMonthEquityDiagram.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="elp87.Finance.Graphs.TradeSystemMonthEquityDiagram" Collapsed="true">
+    <Position X="10" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Graphs\TradeSystemMonthEquityDiagram.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="elp87.Finance.Graphs.TradeDaysProfitDistributionDiagram" Collapsed="true">
+    <Position X="13" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Graphs\TradeDaysProfitDistributionDiagram.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="elp87.Finance.Graphs.TradesProfitDistributionDiagram" Collapsed="true">
+    <Position X="15.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Graphs\TradesProfitDistributionDiagram.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="elp87.Finance.Graphs.TradeSystemDayOfWeekDistributionDiagram" Collapsed="true">
+    <Position X="2.25" Y="6.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Graphs\TradeSystemDayOfWeekDistributionDiagram.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="elp87.Finance.Graphs.TradeSystemTimeDistributionDiagram" Collapsed="true">
+    <Position X="5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Graphs\TradeSystemTimeDistributionDiagram.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

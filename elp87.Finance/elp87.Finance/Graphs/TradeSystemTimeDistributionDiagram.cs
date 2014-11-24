@@ -29,36 +29,8 @@ namespace elp87.Finance.Graphs
                 if (this._categories.Count != 0 || hourTrades.Count() != 0)
                 {
                     string title = hour.ToString();
-                    Money value = hourTrades.Sum(trade => trade.Profit.Value);
 
-                    Money winProfit = hourTrades.Where(trade => trade.Profit > 0).Sum(trade => trade.Profit.Value);
-                    int winCount = hourTrades.Where(trade => trade.Profit > 0).Count();
-                    Money loseProfit = hourTrades.Where(trade => trade.Profit <= 0).Sum(trade => trade.Profit.Value);
-                    int loseCount = hourTrades.Where(trade => trade.Profit <= 0).Count();
-                    double profitFactor;
-                    try
-                    {
-                        profitFactor = Math.Round(winProfit / loseProfit, 2);
-                    }
-                    catch (DivideByZeroException)
-                    {
-                        if (winProfit > 0) profitFactor = Double.PositiveInfinity;
-                        else if (winProfit == 0) profitFactor = Double.NaN;
-                        else profitFactor = Double.NegativeInfinity;
-                    }
-
-                    string tradesCountNotation = "Кол-во сделок - " + hourTrades.Count().ToString();
-                    string winNotation = "Прибыльных - " + winCount.ToString() + "(" + winProfit.ToString() + ")";
-                    string loseNotation = "Убыточных - " + loseCount.ToString() + "(" + loseProfit.ToString() + ")";
-                    string profitFactorNotation = "Профит-фактор - " + profitFactor.ToString();
-                    this._categories.Add(new DiagramCategoryData()
-                    {
-                        Title = title,
-                        Value = Convert.ToDouble(value.Value),
-                        AttachedData = new object[] { tradesCountNotation, winNotation, loseNotation, profitFactorNotation }
-                    });
-
-
+                    this._categories.Add(GetCategoryForTradeSystem(hourTrades, title));
                 }
             }
         }
