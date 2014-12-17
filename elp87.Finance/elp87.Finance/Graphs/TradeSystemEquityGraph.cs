@@ -16,7 +16,8 @@ namespace elp87.Finance.Graphs
                 );
 
             List<ISysTrade> longTrades = system.TradeList.Where(trade => trade.IsLong).ToList();
-            TradeSystem longSystem = new TradeSystem(longTrades);
+            List<ISysTrade> longTradesClone = new List<ISysTrade>(longTrades.Select(trade => (ISysTrade)trade.Clone()));
+            TradeSystem longSystem = new TradeSystem(longTradesClone);
             longSystem.CalcTradeProperties();
             GraphData longTradesGraph = new GraphData(
                 longSystem.TradeList.Select(trade => new PointData() { Date = trade.ExitDateTime, Value = trade.CumProfit }).ToList(),
@@ -24,7 +25,8 @@ namespace elp87.Finance.Graphs
                 );
 
             List<ISysTrade> shortTrades = system.TradeList.Where(trade => trade.IsLong == false).ToList();
-            TradeSystem shortSystem = new TradeSystem(shortTrades);
+            List<ISysTrade> shortTradesClone = new List<ISysTrade>(shortTrades.Select(trade => (ISysTrade)trade.Clone()));
+            TradeSystem shortSystem = new TradeSystem(shortTradesClone);
             shortSystem.CalcTradeProperties();
             GraphData shortTradeGraph = new GraphData(
                 shortSystem.TradeList.Select(trade => new PointData() { Date = trade.ExitDateTime, Value = trade.CumProfit }).ToList(),
