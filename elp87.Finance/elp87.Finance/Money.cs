@@ -230,7 +230,7 @@ namespace elp87.Finance
 
         public static bool operator !=(Money a, Money b)
         {
-            return !a.Equals(b);
+            return !(a == b);
         }
         
         #region Implicit
