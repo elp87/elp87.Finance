@@ -224,7 +224,8 @@ namespace elp87.Finance
 
         public static bool operator ==(Money a, Money b)
         {
-            return a.Equals(b);
+            if (ReferenceEquals(a, null) && ReferenceEquals(b, null)) return true;
+            else return a.Equals(b);
         }
 
         public static bool operator !=(Money a, Money b)
