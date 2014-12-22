@@ -53,6 +53,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bar.cs" />
     <Compile Include="Filter\FilterDay.cs" />
     <Compile Include="Filter\FilterResult.cs" />
     <Compile Include="Filter\FilterSet.cs" />

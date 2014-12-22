@@ -132,7 +132,7 @@ namespace elp87.Finance.Graphs
                         double axisValue = this._catAxis.Value;
                         try
                         {
-                            double categoryValue = Double.Parse(diagramCategoryData.Title.ToString());//Convert.ToDouble(diagramCategoryData.Title);
+                            double categoryValue = Double.Parse(diagramCategoryData.Title.ToString());
                             if (categoryValue < axisValue) { blockBrush = Brushes.Red; }
                             else if (categoryValue == axisValue) { blockBrush = Brushes.Black; }
                             else { blockBrush = Brushes.Green; }
