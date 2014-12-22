@@ -122,7 +122,7 @@ namespace elp87.Finance.Graphs
                     {
                         SolidColorBrush blockBrush = ColorGradient.FromRedToGreen(maxValue - valueRange, maxValue, diagramCategoryData.Value);
                         block.Fill = blockBrush;
-                        block.Stroke = blockBrush;
+                        block.Stroke = Brushes.Black;
                         break;
                     }
                 case FillingTypes.AroundAxisFilling:
@@ -143,7 +143,7 @@ namespace elp87.Finance.Graphs
                             blockBrush = Brushes.Black;
                         }
                         block.Fill = blockBrush;
-                        block.Stroke = blockBrush;
+                        block.Stroke = Brushes.Black;
                         break;
                     }
             }
