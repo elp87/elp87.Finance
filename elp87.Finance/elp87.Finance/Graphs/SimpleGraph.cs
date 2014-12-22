@@ -78,22 +78,22 @@ namespace elp87.Finance.Graphs
         #region Private
         private DateTime GetMinDate()
         {
-            return this._graphs.Min(graph => graph.Points.Min(point => point.Date));
+            return this._graphs.Where(graph => graph.Points.Count > 0).Min(graph => graph.Points.Min(point => point.Date));
         }
 
         private DateTime GetMaxDate()
         {
-            return this._graphs.Max(graph => graph.Points.Max(point => point.Date));
+            return this._graphs.Where(graph => graph.Points.Count > 0).Max(graph => graph.Points.Max(point => point.Date));
         }
 
         private Money GetMinValue()
         {
-            return this._graphs.Min(graph => graph.Points.Min(point => point.Value));
+            return this._graphs.Where(graph => graph.Points.Count > 0).Min(graph => graph.Points.Min(point => point.Value));
         }
 
         private Money GetMaxValue()
         {
-            return this._graphs.Max(graph => graph.Points.Max(point => point.Value));
+            return this._graphs.Where(graph => graph.Points.Count > 0).Max(graph => graph.Points.Max(point => point.Value));
         }
 
         private double GetHorizontalCell(Money range)
@@ -174,74 +174,77 @@ namespace elp87.Finance.Graphs
 
         private void DrawGraphLine(GraphData graph, double zeroLevel, DateTime minDate, double timeRange, Money profitRange, Money maxValue, double gridWidth)
         {
-            double x0, y0;
-
-            Polyline equityLine = new Polyline();
-
-            equityLine.Tag = graph;
-
-            if (graph.Property.Stroke != null)
+            if (graph.Points.Count > 0)
             {
-                equityLine.Stroke = graph.Property.Stroke;
-            }
-            else
-            {
-                equityLine.Stroke = Brushes.Black;
-            }
-            if (graph.Property.Fill != null)
-            {
-                equityLine.Fill = graph.Property.Fill;
-            }
-            equityLine.StrokeThickness = graph.Property.StrokeThickness;
-            equityLine.Opacity = graph.Property.Opacity;
+                double x0, y0;
 
-            if ((graph.Property.Fill != null) && graph.Property.HasToolTip)
-            {
-                equityLine.MouseEnter += equityLine_MouseEnter;
-            }
-            if (graph.Property.MedianLineStroke != null)
-            {
-                this.DrawMedianLine(graph, profitRange, maxValue);
-            }
+                Polyline equityLine = new Polyline();
 
-            equityLine.Points = new PointCollection();
+                equityLine.Tag = graph;
 
-            x0 = 0;
-            y0 = zeroLevel;
-            equityLine.Points.Add(new Point(x0, y0));
+                if (graph.Property.Stroke != null)
+                {
+                    equityLine.Stroke = graph.Property.Stroke;
+                }
+                else
+                {
+                    equityLine.Stroke = Brushes.Black;
+                }
+                if (graph.Property.Fill != null)
+                {
+                    equityLine.Fill = graph.Property.Fill;
+                }
+                equityLine.StrokeThickness = graph.Property.StrokeThickness;
+                equityLine.Opacity = graph.Property.Opacity;
 
-            foreach (PointData point in graph.Points)
-            {
-                double x1, y1;
-                TimeSpan tPosition = point.Date - minDate;
-                double timePosition = tPosition.TotalHours;
-                x1 = (timePosition / timeRange) * gridWidth;
-                y1 = ((maxValue - point.Value) / profitRange) * this._grid.ActualHeight;
-                Point equityPoint = new Point(x1, y1);
-                equityLine.Points.Add((Point)equityPoint);
-            }
+                if ((graph.Property.Fill != null) && graph.Property.HasToolTip)
+                {
+                    equityLine.MouseEnter += equityLine_MouseEnter;
+                }
+                if (graph.Property.MedianLineStroke != null)
+                {
+                    this.DrawMedianLine(graph, profitRange, maxValue);
+                }
 
-            if (graph.Property.Fill != null)
-            {
-                x0 = gridWidth;
-                y0 = (maxValue / profitRange) * this._grid.ActualHeight;
+                equityLine.Points = new PointCollection();
+
+                x0 = 0;
+                y0 = zeroLevel;
                 equityLine.Points.Add(new Point(x0, y0));
+
+                foreach (PointData point in graph.Points)
+                {
+                    double x1, y1;
+                    TimeSpan tPosition = point.Date - minDate;
+                    double timePosition = tPosition.TotalHours;
+                    x1 = (timePosition / timeRange) * gridWidth;
+                    y1 = ((maxValue - point.Value) / profitRange) * this._grid.ActualHeight;
+                    Point equityPoint = new Point(x1, y1);
+                    equityLine.Points.Add((Point)equityPoint);
+                }
+
+                if (graph.Property.Fill != null)
+                {
+                    x0 = gridWidth;
+                    y0 = (maxValue / profitRange) * this._grid.ActualHeight;
+                    equityLine.Points.Add(new Point(x0, y0));
+                }
+
+                this._grid.Children.Add(equityLine);
+
+                Label txtLabel = new Label();
+                Money lastValue = graph.Points.Last().Value;
+                txtLabel.Content = lastValue.ToString();
+                double topOffset = (lastValue > 0) ? 0 : 23;
+                double topThickness = (((maxValue - lastValue) / profitRange) * this._grid.ActualHeight) - topOffset;
+                txtLabel.Margin = new Thickness(gridWidth, topThickness, 0, 0);
+                txtLabel.VerticalAlignment = VerticalAlignment.Top;
+                txtLabel.HorizontalAlignment = HorizontalAlignment.Left;
+                txtLabel.Foreground = Brushes.White;
+                txtLabel.Background = graph.Property.Fill != null ? graph.Property.Fill : graph.Property.Stroke;
+                txtLabel.Height = 23;
+                this._grid.Children.Add(txtLabel);
             }
-
-            this._grid.Children.Add(equityLine);
-
-            Label txtLabel = new Label();
-            Money lastValue = graph.Points.Last().Value;
-            txtLabel.Content = lastValue.ToString();
-            double topOffset = (lastValue > 0) ? 0 : 23;
-            double topThickness = (((maxValue - lastValue) / profitRange) * this._grid.ActualHeight) - topOffset;              
-            txtLabel.Margin = new Thickness(gridWidth, topThickness, 0, 0);
-            txtLabel.VerticalAlignment = VerticalAlignment.Top;
-            txtLabel.HorizontalAlignment = HorizontalAlignment.Left;
-            txtLabel.Foreground = Brushes.White;
-            txtLabel.Background = graph.Property.Fill != null ? graph.Property.Fill : graph.Property.Stroke;
-            txtLabel.Height = 23;
-            this._grid.Children.Add(txtLabel);
         }
 
         private void DrawMedianLine(GraphData graph, Money profitRange, Money maxValue)
