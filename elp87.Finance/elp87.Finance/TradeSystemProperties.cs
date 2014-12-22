@@ -173,12 +173,22 @@ namespace elp87.Finance
 
         public string TradeProfitAverageLong
         {
-            get { return _parent.Trades.Where(trade => trade.IsLong).Average(trade => trade.Profit.Value).ToStringFloat(); }
+            get
+            {
+                var longTrades = _parent.Trades.Where(trade => trade.IsLong);
+                if (longTrades.Count() == 0) return "";
+                else return longTrades.Average(trade => trade.Profit.Value).ToStringFloat();
+            }
         }
 
         public string TradeProfitAverageShort
         {
-            get { return _parent.Trades.Where(trade => !trade.IsLong).Average(trade => trade.Profit.Value).ToStringFloat(); }
+            get
+            {
+                var shortTrades = _parent.Trades.Where(trade => !trade.IsLong);
+                if (shortTrades.Count() == 0) return "";
+                else return shortTrades.Average(trade => trade.Profit.Value).ToStringFloat();
+            }
         }
         #endregion
 
@@ -190,12 +200,22 @@ namespace elp87.Finance
 
         public string TradeProfitPCAverageLong
         {
-            get { return _parent.Trades.Where(trade => trade.IsLong).Average(trade => trade.ProfitPC).ToStringShortFloat() + "%"; }
+            get
+            {
+                var longTrades = _parent.Trades.Where(trade => trade.IsLong);
+                if (longTrades.Count() == 0) return "";
+                return longTrades.Average(trade => trade.ProfitPC).ToStringShortFloat() + "%";
+            }
         }
 
         public string TradeProfitPCAverageShort
         {
-            get { return _parent.Trades.Where(trade => !trade.IsLong).Average(trade => trade.ProfitPC).ToStringShortFloat() + "%"; }
+            get
+            {
+                var shortTrades = _parent.Trades.Where(trade => !trade.IsLong);
+                if (shortTrades.Count() == 0) return "";
+                return shortTrades.Average(trade => trade.ProfitPC).ToStringShortFloat() + "%";
+            }
         }
         #endregion
 
@@ -253,34 +273,64 @@ namespace elp87.Finance
         #region WinProfitAverage
         public string WinProfitAverageAll
         {
-            get { return _parent.Trades.Where(trade => trade.Profit.Value > 0).Average(trade => trade.Profit.Value).ToStringBase(); }
+            get
+            {
+                var trades = _parent.Trades.Where(trade => trade.Profit.Value > 0);
+                if (trades.Count() == 0) return "";
+                else return trades.Average(trade => trade.Profit.Value).ToStringBase();
+            }
         }
 
         public string WinProfitAverageLong
         {
-            get { return _parent.Trades.Where(trade => trade.IsLong && trade.Profit.Value > 0).Average(trade => trade.Profit.Value).ToStringBase(); }
+            get
+            {
+                var trades = _parent.Trades.Where(trade => trade.IsLong && trade.Profit.Value > 0);
+                if (trades.Count() == 0) return "";
+                else return trades.Average(trade => trade.Profit.Value).ToStringBase();
+            }
         }
 
         public string WinProfitAverageShort
         {
-            get { return _parent.Trades.Where(trade => !trade.IsLong && trade.Profit.Value > 0).Average(trade => trade.Profit.Value).ToStringBase(); }
+            get
+            {
+                var trades = _parent.Trades.Where(trade => !trade.IsLong && trade.Profit.Value > 0);
+                if (trades.Count() == 0) return "";
+                else return trades.Average(trade => trade.Profit.Value).ToStringBase();
+            }
         }
         #endregion
 
         #region WinProfitPCAverage
         public string WinProfitPCAverageAll
         {
-            get { return _parent.Trades.Where(trade => trade.ProfitPC > 0).Average(trade => trade.ProfitPC).ToStringShortFloat() + "%"; }
+            get
+            {
+                var trades = _parent.Trades.Where(trade => trade.ProfitPC > 0);
+                if (trades.Count() == 0) return "";
+                else return trades.Average(trade => trade.ProfitPC).ToStringShortFloat() + "%";
+            }
         }
 
         public string WinProfitPCAverageLong
         {
-            get { return _parent.Trades.Where(trade => trade.IsLong && trade.ProfitPC > 0).Average(trade => trade.ProfitPC).ToStringShortFloat() + "%"; }
+            get
+            {
+                var trades = _parent.Trades.Where(trade => trade.IsLong && trade.ProfitPC > 0);
+                if (trades.Count() == 0) return "";
+                else return trades.Average(trade => trade.ProfitPC).ToStringShortFloat() + "%";
+            }
         }
 
         public string WinProfitPCAverageShort
         {
-            get { return _parent.Trades.Where(trade => !trade.IsLong && trade.ProfitPC > 0).Average(trade => trade.ProfitPC).ToStringShortFloat() + "%"; }
+            get
+            {
+                var trades = _parent.Trades.Where(trade => !trade.IsLong && trade.ProfitPC > 0);
+                if (trades.Count() == 0) return "";
+                else return trades.Average(trade => trade.ProfitPC).ToStringShortFloat() + "%";
+            }
         }
         #endregion
 
@@ -355,34 +405,64 @@ namespace elp87.Finance
         #region LoseProfitAverage
         public string LoseProfitAverageAll
         {
-            get { return _parent.Trades.Where(trade => trade.Profit.Value <= 0).Average(trade => trade.Profit.Value).ToStringBase(); }
+            get
+            {
+                var trades = _parent.Trades.Where(trade => trade.Profit.Value <= 0);
+                if (trades.Count() == 0) return "";
+                else return trades.Average(trade => trade.Profit.Value).ToStringBase();
+            }
         }
 
         public string LoseProfitAverageLong
         {
-            get { return _parent.Trades.Where(trade => trade.IsLong && trade.Profit.Value <= 0).Average(trade => trade.Profit.Value).ToStringBase(); }
+            get
+            {
+                var trades = _parent.Trades.Where(trade => trade.IsLong && trade.Profit.Value <= 0);
+                if (trades.Count() == 0) return "";
+                else return trades.Average(trade => trade.Profit.Value).ToStringBase();
+            }
         }
 
         public string LoseProfitAverageShort
         {
-            get { return _parent.Trades.Where(trade => !trade.IsLong && trade.Profit.Value <= 0).Average(trade => trade.Profit.Value).ToStringBase(); }
+            get
+            {
+                var trades = _parent.Trades.Where(trade => !trade.IsLong && trade.Profit.Value <= 0);
+                if (trades.Count() == 0) return "";
+                else return trades.Average(trade => trade.Profit.Value).ToStringBase();
+            }
         }
         #endregion
 
         #region LoseProfitPCAverage
         public string LoseProfitPCAverageAll
         {
-            get { return _parent.Trades.Where(trade => trade.ProfitPC <= 0).Average(trade => trade.ProfitPC).ToStringShortFloat() + "%"; }
+            get
+            {
+                var trades = _parent.Trades.Where(trade => trade.ProfitPC <= 0);
+                if (trades.Count() == 0) return "";
+                else return trades.Average(trade => trade.ProfitPC).ToStringShortFloat() + "%";
+            }
         }
 
         public string LoseProfitPCAverageLong
         {
-            get { return _parent.Trades.Where(trade => trade.IsLong && trade.ProfitPC <= 0).Average(trade => trade.ProfitPC).ToStringShortFloat() + "%"; }
+            get
+            {
+                var trades = _parent.Trades.Where(trade => trade.IsLong && trade.ProfitPC <= 0);
+                if (trades.Count() == 0) return "";
+                else return trades.Average(trade => trade.ProfitPC).ToStringShortFloat() + "%";
+            }
         }
 
         public string LoseProfitPCAverageShort
         {
-            get { return _parent.Trades.Where(trade => !trade.IsLong && trade.ProfitPC <= 0).Average(trade => trade.ProfitPC).ToStringShortFloat() + "%"; }
+            get
+            {
+                var trades = _parent.Trades.Where(trade => !trade.IsLong && trade.ProfitPC <= 0);
+                if (trades.Count() == 0) return "";
+                else return trades.Average(trade => trade.ProfitPC).ToStringShortFloat() + "%";
+            }
         }
         #endregion
 

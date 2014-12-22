@@ -146,7 +146,12 @@ namespace elp87.Finance.Helpers
         {
             Money sumWinProfit = source.Where(trade => (trade.Profit > 0) && predicate(trade)).Sum(trade => trade.Profit.Value);
             Money sumLoseProfit = source.Where(trade => (trade.Profit <= 0) && predicate(trade)).Sum(trade => trade.Profit.Value);
-
+            if (sumLoseProfit == 0)
+            {
+                if (sumWinProfit > 0) return Double.PositiveInfinity;
+                else if (sumWinProfit < 0) return Double.NegativeInfinity;
+                else if (sumWinProfit == 0) return Double.NaN;
+            }
             return -(sumWinProfit / sumLoseProfit);
         }
 
@@ -161,6 +166,12 @@ namespace elp87.Finance.Helpers
         {
             Money profit = source.Where(predicate).Sum(trade => trade.Profit.Value);
             Money maxDD = source.MaxDrawDown(predicate);
+            if (maxDD == 0)
+            {
+                if (profit > 0) return Double.PositiveInfinity;
+                else if (profit < 0) return Double.NegativeInfinity;
+                else if (profit == 0) return Double.NaN;
+            }
             return -(profit / maxDD);
         }
 
@@ -173,8 +184,22 @@ namespace elp87.Finance.Helpers
         #region Payoff ratio
         public static double PayoffRatio(this IEnumerable<ITrade> source, Func<ITrade, bool> predicate)
         {
-            Money avgWinProfit = source.Where(trade => (trade.Profit > 0) && predicate(trade)).Average(trade => trade.Profit.Value);
-            Money avgLoseProfit = source.Where(trade => (trade.Profit <= 0) && predicate(trade)).Average(trade => trade.Profit.Value);
+            Money avgLoseProfit, avgWinProfit;
+
+            var winTrades = source.Where(trade => (trade.Profit > 0) && predicate(trade));
+            if (winTrades.Count() == 0) avgWinProfit = 0;
+            else avgWinProfit = winTrades.Average(trade => trade.Profit.Value);
+
+            var loseTrades = source.Where(trade => (trade.Profit <= 0) && predicate(trade));
+            if (loseTrades.Count() == 0) avgLoseProfit = 0;
+            else avgLoseProfit = loseTrades.Average(trade => trade.Profit.Value);
+
+            if (avgLoseProfit == 0)
+            {
+                if (avgWinProfit > 0) return Double.PositiveInfinity;
+                else if (avgWinProfit < 0) return Double.NegativeInfinity;
+                else if (avgWinProfit == 0) return Double.NaN;
+            }
             return -(avgWinProfit / avgLoseProfit);
         }
 

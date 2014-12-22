@@ -1,7 +1,8 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using elp87.Finance;
+﻿using elp87.Finance;
 using elp87.Finance.Helpers;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 
 namespace Test.elp87.Finance
 {
@@ -443,6 +444,90 @@ namespace Test.elp87.Finance
             Assert.AreEqual(expAll, sys1Prop.PayoffRatioAll);
             Assert.AreEqual(expLong, sys1Prop.PayoffRatioLong);
             Assert.AreEqual(expShort, sys1Prop.PayoffRatioShort);
-        }        
+        }
+
+        [TestMethod]
+        public void TestOneTradeSystemLongProfit()
+        {
+            SysTrade trade = new SysTrade()
+            {
+                EntryDateTime = new DateTime(2014, 1, 1, 10, 0, 0),
+                EntryPrice = 10,
+                ExitDateTime = new DateTime(2014, 1, 1, 11, 0, 0),
+                ExitPrice = 11,
+                IsLong = true,
+                Count = 1
+            };
+            TradeSystem system = new TradeSystem();
+            system.AddTrade(trade);
+            system.CalcTradeProperties();
+
+            TradeSystemProperties props = new TradeSystemProperties(system);
+            List<TradeProperty> properties = props.GetPropertyList();
+
+        }
+
+        [TestMethod]
+        public void TestOneTradeSystemShortProfit()
+        {
+            SysTrade trade = new SysTrade()
+            {
+                EntryDateTime = new DateTime(2014, 1, 1, 10, 0, 0),
+                EntryPrice = 11,
+                ExitDateTime = new DateTime(2014, 1, 1, 11, 0, 0),
+                ExitPrice = 10,
+                IsLong = false,
+                Count = 1
+            };
+            TradeSystem system = new TradeSystem();
+            system.AddTrade(trade);
+            system.CalcTradeProperties();
+
+            TradeSystemProperties props = new TradeSystemProperties(system);
+            List<TradeProperty> properties = props.GetPropertyList();
+
+        }
+
+        [TestMethod]
+        public void TestOneTradeSystemLongLose()
+        {
+            SysTrade trade = new SysTrade()
+            {
+                EntryDateTime = new DateTime(2014, 1, 1, 10, 0, 0),
+                EntryPrice = 11,
+                ExitDateTime = new DateTime(2014, 1, 1, 11, 0, 0),
+                ExitPrice = 10,
+                IsLong = true,
+                Count = 1
+            };
+            TradeSystem system = new TradeSystem();
+            system.AddTrade(trade);
+            system.CalcTradeProperties();
+
+            TradeSystemProperties props = new TradeSystemProperties(system);
+            List<TradeProperty> properties = props.GetPropertyList();
+
+        }
+
+        [TestMethod]
+        public void TestOneTradeSystemShortLose()
+        {
+            SysTrade trade = new SysTrade()
+            {
+                EntryDateTime = new DateTime(2014, 1, 1, 10, 0, 0),
+                EntryPrice = 10,
+                ExitDateTime = new DateTime(2014, 1, 1, 11, 0, 0),
+                ExitPrice = 11,
+                IsLong = false,
+                Count = 1
+            };
+            TradeSystem system = new TradeSystem();
+            system.AddTrade(trade);
+            system.CalcTradeProperties();
+
+            TradeSystemProperties props = new TradeSystemProperties(system);
+            List<TradeProperty> properties = props.GetPropertyList();
+
+        }
     }
 }
