@@ -35,9 +35,10 @@ namespace elp87.Finance.Graphs
 
             if (this._categories.Count > 0)
             {
-                double maxValue = this.GetMaxValue();
-                double minValue = this.GetMinValue();
+                double maxValue = Math.Max(0, this.GetMaxValue());
+                double minValue = Math.Min(0, this.GetMinValue());
                 double valueRange = maxValue - minValue;
+                if (valueRange == 0) return;
 
                 this.DrawZeroLine(maxValue, valueRange);
                 for (int i = 0; i < this._categories.Count; i++)
