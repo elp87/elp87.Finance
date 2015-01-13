@@ -10,14 +10,17 @@ namespace elp87.Finance.Graphs
         public TradesProfitDistributionDiagram(Grid grid, TradeSystem system)
             : base(grid)
         {
-            this._categories = new List<DiagramCategoryData>();
-            List<ISysTrade> trades = system.TradeList;
-            Money minValue = Math.Round(trades.Min(trade => trade.ProfitPC), 1);
-            Money maxValue = Math.Round(trades.Max(trade => trade.ProfitPC), 1);
-            for (Money value = minValue; value <= maxValue; value += 0.1)
+            if (system.TradeList.Count != 0)
             {
-                int count = trades.Count(trade => Math.Round(trade.ProfitPC, 1) == value);
-                this._categories.Add(new DiagramCategoryData() { Title = value, Value = count });
+                this._categories = new List<DiagramCategoryData>();
+                List<ISysTrade> trades = system.TradeList;
+                Money minValue = Math.Round(trades.Min(trade => trade.ProfitPC), 1);
+                Money maxValue = Math.Round(trades.Max(trade => trade.ProfitPC), 1);
+                for (Money value = minValue; value <= maxValue; value += 0.1)
+                {
+                    int count = trades.Count(trade => Math.Round(trade.ProfitPC, 1) == value);
+                    this._categories.Add(new DiagramCategoryData() { Title = value, Value = count });
+                }
             }
         }
     }

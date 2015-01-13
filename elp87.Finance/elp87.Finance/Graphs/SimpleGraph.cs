@@ -50,27 +50,29 @@ namespace elp87.Finance.Graphs
         public void DrawGraph()
         {
             this._grid.Children.Clear();
-
-            DateTime minDate = this.GetMinDate();
-            DateTime maxDate = this.GetMaxDate();
-            TimeSpan tRange = maxDate - minDate;
-            double timeRange = tRange.TotalHours;
-
-            Money minValue = this.GetMinValue();
-            Money maxValue = this.GetMaxValue();
-            Money profitRange = maxValue - minValue;
-
-            double zeroLevel = (maxValue / profitRange) * this._grid.ActualHeight;
-            this._actualGridWidth = this._grid.ActualWidth - _sideBlockWidth;
-
-            double horizontLineHeight = this.GetHorizontalCell(profitRange);
-            this.DrawSideBlock(this._grid, this._actualGridWidth);
-            this.DrawHorizontLines(horizontLineHeight, this._grid, profitRange, maxValue, this._actualGridWidth);
-            this.DrawMonthLines(minDate, timeRange, this._grid, this._actualGridWidth);
-
-            foreach (GraphData graph in this._graphs)
+            if (this._graphs.Where(graph => graph.Points.Count == 0).Count() < this._graphs.Count()) // check if there are graphs with points
             {
-                this.DrawGraphLine(graph, zeroLevel, minDate, timeRange, profitRange, maxValue, this._actualGridWidth);
+                DateTime minDate = this.GetMinDate();
+                DateTime maxDate = this.GetMaxDate();
+                TimeSpan tRange = maxDate - minDate;
+                double timeRange = tRange.TotalHours;
+
+                Money minValue = this.GetMinValue();
+                Money maxValue = this.GetMaxValue();
+                Money profitRange = maxValue - minValue;
+
+                double zeroLevel = (maxValue / profitRange) * this._grid.ActualHeight;
+                this._actualGridWidth = this._grid.ActualWidth - _sideBlockWidth;
+
+                double horizontLineHeight = this.GetHorizontalCell(profitRange);
+                this.DrawSideBlock(this._grid, this._actualGridWidth);
+                this.DrawHorizontLines(horizontLineHeight, this._grid, profitRange, maxValue, this._actualGridWidth);
+                this.DrawMonthLines(minDate, timeRange, this._grid, this._actualGridWidth);
+
+                foreach (GraphData graph in this._graphs)
+                {
+                    this.DrawGraphLine(graph, zeroLevel, minDate, timeRange, profitRange, maxValue, this._actualGridWidth);
+                }
             }
         }        
         #endregion

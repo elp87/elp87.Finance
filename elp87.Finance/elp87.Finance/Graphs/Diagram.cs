@@ -33,7 +33,7 @@ namespace elp87.Finance.Graphs
         {
             this._grid.Children.Clear();
 
-            if (this._categories.Count > 0)
+            if ((this._categories != null) && (this._categories.Count > 0))
             {
                 double maxValue = Math.Max(0, this.GetMaxValue());
                 double minValue = Math.Min(0, this.GetMinValue());
