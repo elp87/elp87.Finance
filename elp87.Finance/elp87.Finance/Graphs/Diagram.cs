@@ -121,7 +121,9 @@ namespace elp87.Finance.Graphs
             {
                 case FillingTypes.MinToMaxGradient:
                     {
-                        SolidColorBrush blockBrush = ColorGradient.FromRedToGreen(maxValue - valueRange, maxValue, diagramCategoryData.Value);
+                        SolidColorBrush blockBrush;
+                        if (diagramCategoryData.Value > 0) blockBrush = ColorGradient.FromYellowToGreen(Math.Min(0, maxValue - valueRange), maxValue, diagramCategoryData.Value);
+                        else blockBrush = ColorGradient.FromRedToYellow(maxValue - valueRange, Math.Max(maxValue, 0), diagramCategoryData.Value);
                         block.Fill = blockBrush;
                         block.Stroke = Brushes.Black;
                         break;
