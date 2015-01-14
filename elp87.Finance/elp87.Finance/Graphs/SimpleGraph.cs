@@ -90,12 +90,12 @@ namespace elp87.Finance.Graphs
 
         private Money GetMinValue()
         {
-            return this._graphs.Where(graph => graph.Points.Count > 0).Min(graph => graph.Points.Min(point => point.Value));
+            return Math.Min(this._graphs.Where(graph => graph.Points.Count > 0).Min(graph => graph.Points.Min(point => point.Value)).Value, 0);
         }
 
         private Money GetMaxValue()
         {
-            return this._graphs.Where(graph => graph.Points.Count > 0).Max(graph => graph.Points.Max(point => point.Value));
+            return Math.Max(this._graphs.Where(graph => graph.Points.Count > 0).Max(graph => graph.Points.Max(point => point.Value)).Value, 0);
         }
 
         private double GetHorizontalCell(Money range)
