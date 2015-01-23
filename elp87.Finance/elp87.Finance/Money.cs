@@ -2,7 +2,7 @@
 
 namespace elp87.Finance
 {
-    public class Money : IComparable, ICloneable, IConvertible
+    public class Money : IComparable, ICloneable
     {
         #region Fields
         private decimal _value;
@@ -72,7 +72,7 @@ namespace elp87.Finance
         }
 
         #region IConvertible
-        public TypeCode GetTypeCode()
+        /*public TypeCode GetTypeCode()
         {
             return TypeCode.Object;
         }
@@ -156,7 +156,7 @@ namespace elp87.Finance
         public ulong ToUInt64(IFormatProvider provider)
         {
             return Convert.ToUInt64(this.Value);
-        }
+        }*/
         #endregion
         #endregion
         #endregion
