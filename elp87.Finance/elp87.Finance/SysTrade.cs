@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 namespace elp87.Finance
 {
     public class SysTrade : Trade, ISysTrade
@@ -37,6 +37,15 @@ namespace elp87.Finance
             {
                 throw new ArgumentException();
             }
+        }
+
+        public bool HasEqual(List<ISysTrade> trades)
+        {
+            foreach (ISysTrade trade in trades)
+            {
+                if (this.Equals(trade)) return true;
+            }
+            return false;
         }
     }
 }
