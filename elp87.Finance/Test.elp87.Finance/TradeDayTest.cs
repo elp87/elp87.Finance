@@ -32,5 +32,13 @@ namespace Test.elp87.Finance
                 Assert.AreEqual(expDrawDown[i], tradeDays[i].DrawDown);
             }
         }
+
+        [TestMethod]
+        public void TestCtorFullWithdrawal()
+        {
+            TradeDay firstDay = new TradeDay(new DateTime(2015, 1, 1), new Money(100000), new Money(0), null);
+            TradeDay seconDay = new TradeDay(new DateTime(2015, 1, 2), new Money(0), new Money(-100000), firstDay);
+            Assert.AreEqual(seconDay.CumProfitPC, 0, 0.001);
+        }
     }
 }

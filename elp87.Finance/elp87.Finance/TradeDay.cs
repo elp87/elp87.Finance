@@ -7,7 +7,7 @@ namespace elp87.Finance
         #region Поля
         private DateTime _date;
         private Money _capital, _dayProfit, _cumProfit, _introduce, _drawDown;
-        private double _cumProfitPC;
+        private double _cumProfitPc;
         #endregion
 
         #region Constructors
@@ -20,26 +20,26 @@ namespace elp87.Finance
             Money introduce,
             TradeDay previousDay)
         {
-            this._date = date;
-            this._capital = capital;
-            this._introduce = introduce;
+            _date = date;
+            _capital = capital;
+            _introduce = introduce;
 
             if (previousDay != null)
             {
-                this._dayProfit = (this._capital - previousDay._capital) - this._introduce;
-                this._cumProfit = previousDay._cumProfit + this._dayProfit;
+                _dayProfit = (_capital - previousDay._capital) - _introduce;
+                _cumProfit = previousDay._cumProfit + _dayProfit;
 
-                Money dd = previousDay._drawDown - this._dayProfit;
-                this._drawDown = (dd < 0) ? 0 : dd;
+                Money dd = previousDay._drawDown - _dayProfit;
+                _drawDown = (dd < 0) ? 0 : dd;
 
-                this._cumProfitPC = previousDay._cumProfitPC + this.DayProfitPC;
+                _cumProfitPc = previousDay._cumProfitPc + DayProfitPC;
             }
             else
             {
-                this._dayProfit = 0;
-                this._cumProfit = this._dayProfit;
-                this._drawDown = (this._dayProfit > 0) ? 0 : this._dayProfit;
-                this._cumProfitPC = this.DayProfitPC;
+                _dayProfit = 0;
+                _cumProfit = _dayProfit;
+                _drawDown = (_dayProfit > 0) ? 0 : _dayProfit;
+                _cumProfitPc = DayProfitPC;
             }
         }
         #endregion
@@ -121,11 +121,11 @@ namespace elp87.Finance
         {
             get
             {
-                return _cumProfitPC;
+                return _cumProfitPc;
             }
             set
             {
-                _cumProfitPC = value;
+                _cumProfitPc = value;
             }
         }
 
@@ -133,6 +133,7 @@ namespace elp87.Finance
         {
             get
             {
+                if (_capital.Value == 0m) return 0; // В случае полного вывода возвращается 0
                 return (_dayProfit / _capital) * 100;
             }
         }
