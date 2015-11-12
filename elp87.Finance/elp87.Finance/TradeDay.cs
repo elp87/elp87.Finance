@@ -5,9 +5,7 @@ namespace elp87.Finance
     public class TradeDay        
     {
         #region Поля
-        private DateTime _date;
-        private Money _capital, _dayProfit, _cumProfit, _introduce, _drawDown;
-        private double _cumProfitPc;
+
         #endregion
 
         #region Constructors
@@ -20,121 +18,51 @@ namespace elp87.Finance
             Money introduce,
             TradeDay previousDay)
         {
-            _date = date;
-            _capital = capital;
-            _introduce = introduce;
+            Date = date;
+            Capital = capital;
+            Introduce = introduce;
 
             if (previousDay != null)
             {
-                _dayProfit = (_capital - previousDay._capital) - _introduce;
-                _cumProfit = previousDay._cumProfit + _dayProfit;
+                DayProfit = (Capital - previousDay.Capital) - Introduce;
+                CumProfit = previousDay.CumProfit + DayProfit;
 
-                Money dd = previousDay._drawDown - _dayProfit;
-                _drawDown = (dd < 0) ? 0 : dd;
+                Money dd = previousDay.DrawDown - DayProfit;
+                DrawDown = (dd < 0) ? 0 : dd;
 
-                _cumProfitPc = previousDay._cumProfitPc + DayProfitPC;
+                CumProfitPC = previousDay.CumProfitPC + DayProfitPC;
             }
             else
             {
-                _dayProfit = 0;
-                _cumProfit = _dayProfit;
-                _drawDown = (_dayProfit > 0) ? 0 : _dayProfit;
-                _cumProfitPc = DayProfitPC;
+                DayProfit = 0;
+                CumProfit = DayProfit;
+                DrawDown = (DayProfit > 0) ? 0 : DayProfit;
+                CumProfitPC = DayProfitPC;
             }
         }
         #endregion
 
         #region Properties
-        public DateTime Date
-        {
-            get 
-            { 
-                return _date; 
-            }
-            set
-            {
-                _date = value;
-            }
-        }
+        public DateTime Date { get; set; }
 
-        public Money Capital
-        {
-            get
-            {
-                return _capital;
-            }
-            set
-            {
-                _capital = value;
-            }
-        }
+        public Money Capital { get; set; }
 
-        public Money DayProfit
-        {
-            get
-            {
-                return _dayProfit;
-            }
-            set
-            {
-                _dayProfit = value;
-            }
-        }
+        public Money DayProfit { get; set; }
 
-        public Money CumProfit
-        {
-            get
-            {
-                return _cumProfit;
-            }
-            set
-            {
-                _cumProfit = value;
-            }
-        }
+        public Money CumProfit { get; set; }
 
-        public Money Introduce
-        {
-            get
-            {
-                return _introduce;
-            }
-            set
-            {
-                _introduce = value;
-            }
-        }
+        public Money Introduce { get; set; }
 
-        public Money DrawDown
-        {
-            get
-            {
-                return _drawDown;
-            }
-            set
-            {
-                _drawDown = value;
-            }
-        }
+        public Money DrawDown { get; set; }
 
-        public double CumProfitPC
-        {
-            get
-            {
-                return _cumProfitPc;
-            }
-            set
-            {
-                _cumProfitPc = value;
-            }
-        }
+        public double CumProfitPC { get; set; }
 
         public double DayProfitPC
         {
             get
             {
-                if (_capital.Value == 0m) return 0; // В случае полного вывода возвращается 0
-                return (_dayProfit / _capital) * 100;
+                if (Capital.Value == 0m) return 0; // В случае полного вывода возвращается 0
+                return (DayProfit / Capital) * 100;
             }
         }
         #endregion

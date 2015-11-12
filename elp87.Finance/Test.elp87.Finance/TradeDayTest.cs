@@ -38,7 +38,7 @@ namespace Test.elp87.Finance
         {
             TradeDay firstDay = new TradeDay(new DateTime(2015, 1, 1), new Money(100000), new Money(0), null);
             TradeDay seconDay = new TradeDay(new DateTime(2015, 1, 2), new Money(0), new Money(-100000), firstDay);
-            Assert.AreEqual(seconDay.CumProfitPC, 0, 0.001);
+            Assert.AreEqual(seconDay.DayProfitPC, 0, 0.001);
         }
     }
 }
