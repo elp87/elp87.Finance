@@ -6,37 +6,27 @@ namespace elp87.Finance
     {
         public string TsLabDealType
         {
-            set { _isLong = (value == "Длинная") ? true : false; }
+            set { IsLong = (value == "Длинная") ? true : false; }
         }
 
         public string TsLabEntryDateTime
         {
-            set { _entryDateTime = DateTime.Parse(value); }
+            set { EntryDateTime = DateTime.Parse(value); }
         }
 
         public string TsLabExitDateTime
         {
-            set { _exitDateTime = DateTime.Parse(value); }
+            set { ExitDateTime = DateTime.Parse(value); }
         }
 
         public string TsLabEntryPrice
         {
-            set { _entryPrice = Convert.ToDecimal(value); }
+            set { EntryPrice = Convert.ToDecimal(value); }
         }
 
         public string TsLabExitPrice
         {
-            set { _exitPrice = Convert.ToDecimal(value); }
-        }
-
-        public override bool Equals(object obj)
-        {
-            return base.Equals(obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
+            set { ExitPrice = Convert.ToDecimal(value); }
         }
     }
 }

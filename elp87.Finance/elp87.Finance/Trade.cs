@@ -5,59 +5,33 @@ namespace elp87.Finance
     public class Trade : ITrade, ICloneable
     {
         #region Fields
-        protected DateTime _entryDateTime;
-        protected DateTime _exitDateTime;
-        protected Money _entryPrice;
-        protected Money _exitPrice;
-        protected int _count;
-        protected string _instrumentName;
-        protected bool _isLong;
+
         #endregion
 
         #region Properties
-        public DateTime EntryDateTime
-        {
-            get { return _entryDateTime; }
-            set { _entryDateTime = value; }
-        }
+        public DateTime EntryDateTime { get; set; }
 
-        public DateTime ExitDateTime
-        {
-            get { return _exitDateTime; }
-            set { _exitDateTime = value; }
-        }
+        public DateTime ExitDateTime { get; set; }
 
-        public Money EntryPrice
-        {
-            get { return _entryPrice; }
-            set { _entryPrice = value; }
-        }
+        public Money EntryPrice { get; set; }
 
-        public Money ExitPrice
-        {
-            get { return _exitPrice; }
-            set { _exitPrice = value; }
-        }
+        public Money ExitPrice { get; set; }
 
-        public int Count
-        {
-            get { return _count; }
-            set { _count = value; }
-        }
+        public int Count { get; set; }
 
         public Money EntryVolume
         {
-            get { return (_entryPrice * _count); }
+            get { return (EntryPrice * Count); }
         }
 
         public Money ExitVolume
         {
-            get { return (_exitPrice * _count); }
+            get { return (ExitPrice * Count); }
         }
 
         public Money Profit
         {
-            get { return (_isLong) ? (ExitVolume - EntryVolume) : (EntryVolume - ExitVolume); }
+            get { return (IsLong) ? (ExitVolume - EntryVolume) : (EntryVolume - ExitVolume); }
         }
 
         public double ProfitPC
@@ -65,23 +39,15 @@ namespace elp87.Finance
             get { return (Profit / ExitVolume) * 100; }
         }
 
-        public string InstrumentName
-        {
-            get { return _instrumentName; }
-            set { _instrumentName = value; }
-        }
+        public string InstrumentName { get; set; }
 
-        public bool IsLong
-        {
-            get { return _isLong; }
-            set { _isLong = value; }
-        }
+        public bool IsLong { get; set; }
 
         public string DealType
         {
             get
             {
-                if (_isLong) return "Long";
+                if (IsLong) return "Long";
                 else return "Short";
             }
         }
@@ -89,13 +55,8 @@ namespace elp87.Finance
 
         #region Methods
         #region Override
-        public override bool Equals(System.Object obj)
+        public override bool Equals(Object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
-
             Trade eqTrade = obj as Trade;
             if (eqTrade == null) return false;
 
