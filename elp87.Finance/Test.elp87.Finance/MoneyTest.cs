@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using elp87.Finance;
 using System;
+using System.Globalization;
 
 namespace Test.elp87.Finance
 {
@@ -311,6 +312,38 @@ namespace Test.elp87.Finance
             {
                 Assert.AreEqual(moneyArray[i], (Money)cloneArray[i]);
             }
+        }
+
+        [TestMethod]
+        public void TestSpeed()
+        {
+            DateTime start1 = DateTime.Now;
+            for (int i = 0; i < 100000; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    Money a = new Money(intValues[2 * j]);
+                    Money b = new Money(intValues[2 * j + 1]);
+                    Money r = a + b;
+                }
+            }
+            DateTime finish1 = DateTime.Now;
+            TimeSpan m1TimeSpan = finish1 - start1;
+            var m1result = m1TimeSpan.TotalMilliseconds;
+
+            DateTime start2 = DateTime.Now;
+            for (int i = 0; i < 100000; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    Money2 a = new Money2(intValues[2 * j]);
+                    Money2 b = new Money2(intValues[2 * j + 1]);
+                    Money2 r = a + b;
+                }
+            }
+            DateTime finish2 = DateTime.Now;
+            TimeSpan m2TimeSpan = finish2 - start2;
+            var m2result = m2TimeSpan.TotalMilliseconds;
         }
     }
 }
