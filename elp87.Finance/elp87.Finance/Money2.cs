@@ -62,6 +62,67 @@ namespace elp87.Finance
         {
             return new Money2(BigInteger.Add(a._value, b._value));
         }
+
+        public static Money2 operator -(Money2 a, Money2 b)
+        {
+            return new Money2(BigInteger.Subtract(a._value, b._value));
+        }
+
+        public static Money2 operator -(Money2 a)
+        {
+            return new Money2(BigInteger.Negate(a._value));
+        }
+
+        public static Money2 operator *(Money2 a, int mult)
+        {
+            return new Money2(BigInteger.Multiply(a._value, new BigInteger(mult)));
+        }
+
+        public static Money2 operator *(Money2 a, double mult)
+        {
+            return new Money2(BigInteger.Multiply(a._value, new BigInteger(mult)));
+        }
+
+        public static Money2 operator /(Money2 a, int divisor)
+        {
+            return new Money2(BigInteger.Divide(a._value, new BigInteger(divisor)));
+        }
+
+        public static Money2 operator /(Money2 a, double divisor)
+        {
+            return new Money2(BigInteger.Divide(a._value, new BigInteger(divisor)));
+        }
+
+        public static bool operator >(Money2 a, Money2 b)
+        {
+            return (a._value > b._value);
+        }
+
+        public static bool operator <(Money2 a, Money2 b)
+        {
+            return (a._value < b._value);
+        }
+
+        public static bool operator >=(Money2 a, Money2 b)
+        {
+            return (a._value >= b._value);
+        }
+
+        public static bool operator <=(Money2 a, Money2 b)
+        {
+            return (a._value <= b._value);
+        }
+
+        public static bool operator ==(Money2 a, Money2 b)
+        {
+            if (ReferenceEquals(a, null) && ReferenceEquals(b, null)) return true;// TODO: Тесты на null
+            return (a != null && b != null &&  a._value.Equals(b._value));
+        }
+
+        public static bool operator !=(Money2 a, Money2 b)
+        {
+            return !(a == b);
+        }
         #endregion
         
     }
