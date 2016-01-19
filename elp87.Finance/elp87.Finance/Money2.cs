@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System.Globalization;
+using System.Numerics;
 
 namespace elp87.Finance
 {
@@ -28,6 +29,32 @@ namespace elp87.Finance
 
         #region Properties
         public double Value { get { return (double)BigInteger.Divide(_value, Bi10000); } }
+        #endregion
+
+        #region Methods
+        public override string ToString()
+        {
+            return Value.ToString(CultureInfo.InvariantCulture);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+
+            Money2 other = (Money2) obj;
+            return _value.Equals(other._value);
+        }
+
+        protected bool Equals(Money2 other)
+        {
+            return _value.Equals(other._value);
+        }
+
+        public override int GetHashCode()
+        {
+            return _value.GetHashCode();
+        }
+
         #endregion
 
         #region Operators
