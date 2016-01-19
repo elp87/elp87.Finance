@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Numerics;
 
 namespace elp87.Finance
@@ -113,10 +114,11 @@ namespace elp87.Finance
             return (a._value <= b._value);
         }
 
+        [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
         public static bool operator ==(Money2 a, Money2 b)
         {
-            if (ReferenceEquals(a, null) && ReferenceEquals(b, null)) return true;// TODO: Тесты на null
-            return (a != null && b != null &&  a._value.Equals(b._value));
+            if (ReferenceEquals(a, null) && ReferenceEquals(b, null)) return true;
+            return !ReferenceEquals(a, null) && !ReferenceEquals(b, null) && a._value.Equals(b._value);
         }
 
         public static bool operator !=(Money2 a, Money2 b)
