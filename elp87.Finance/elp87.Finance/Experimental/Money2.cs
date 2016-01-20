@@ -3,9 +3,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Numerics;
 
-namespace elp87.Finance
+namespace elp87.Finance.Experimental
 {
-    public class Money2 : IComparable, 
+    public class Money2 : IComparable
     {
         #region Fields
 
