@@ -1,38 +1,51 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Numerics;
 
 namespace elp87.Finance
 {
-    public class Money2
+    public class Money2 : IComparable, 
     {
         #region Fields
+
         private readonly BigInteger _value;
         private static readonly BigInteger Bi10000 = new BigInteger(10000);
+
         #endregion
 
         #region Constructors
+
         public Money2(double value)
         {
-            _value = new BigInteger(value * 10000);
+            _value = new BigInteger(value*10000);
         }
 
         public Money2(int value)
         {
-            _value = new BigInteger(value * 10000);
+            _value = new BigInteger(value*10000);
         }
 
         private Money2(BigInteger value)
         {
             _value = value;
         }
-	    #endregion
+
+        #endregion
 
         #region Properties
-        public double Value { get { return (double)BigInteger.Divide(_value, Bi10000); } }
+
+        public double Value
+        {
+            get { return (double) BigInteger.Divide(_value, Bi10000); }
+        }
+
         #endregion
 
         #region Methods
+
+        #region Override
+
         public override string ToString()
         {
             return Value.ToString(CultureInfo.InvariantCulture);
@@ -58,7 +71,28 @@ namespace elp87.Finance
 
         #endregion
 
+        #region Interfaces
+
+        public int CompareTo(object obj)
+        {
+            if (obj == null) return 1;
+
+            Money2 other = obj as Money2;
+            if (other != null)
+            {
+                return _value.CompareTo(other._value);
+            }
+            else
+            {
+                throw new ArgumentException("Object is not Money2");
+            }
+        }
+
+        #endregion
+        #endregion
+
         #region Operators
+
         public static Money2 operator +(Money2 a, Money2 b)
         {
             return new Money2(BigInteger.Add(a._value, b._value));
@@ -125,7 +159,9 @@ namespace elp87.Finance
         {
             return !(a == b);
         }
+
         #endregion
+
         
     }
 }
