@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using elp87.Finance;
+using elp87.Finance.Experimental;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Test.elp87.Finance
