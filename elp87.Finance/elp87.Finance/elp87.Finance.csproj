@@ -85,6 +85,7 @@
     <Compile Include="ITrade.cs" />
     <Compile Include="Money.cs" />
     <Compile Include="Experimental\Money2.cs" />
+    <Compile Include="Portfolio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
